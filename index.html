@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>UniQwerty</title>
+<style>
+  :root{--btn:#ff3b30; --ink:#111; --mut:#444; --line:#e9eaee}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Arial;background:#000;color:#fff}
+  /* HERO */
+  .hero{position:relative;min-height:100vh;overflow:hidden}
+  .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .hero .enter{position:absolute;right:5vw;bottom:8vh;background:var(--btn);color:#fff;border:none;border-radius:999px;padding:16px 28px;font-size:18px;cursor:pointer}
+  /* MODAL */
+  .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.65);backdrop-filter:blur(3px);z-index:50}
+  .modal.on{display:flex}
+  .sheet{width:min(1000px,94vw);background:#fff;border:1px solid #e5e5e5;border-radius:18px;overflow:hidden;box-shadow:0 30px 120px rgba(0,0,0,.45)}
+  .slide{position:relative;width:100%;aspect-ratio:16/9;display:none;background:#fff;color:var(--ink)}
+  .slide.on{display:block}
+  .s1-wrap{position:relative;height:100%;padding:28px 36px}
+  .title1{position:absolute;left:7%;top:8%;margin:0;font-size:34px;font-weight:800}
+  .bullets{position:absolute;left:7%;top:16%;font-size:26px;line-height:1.6}
+  .keysRow{position:absolute;left:7%;bottom:16%;width:62%;max-width:700px}
+  .stepno{position:absolute;left:7%;bottom:7%;color:#666;font-size:16px}
+  .frame{height:100%;padding:28px 36px;display:grid;grid-template-columns:220px 1fr;grid-template-rows:auto auto 1fr;gap:8px 24px;position:relative}
+  .keyIcon{grid-column:1;grid-row:1 / span 2;align-self:start;justify-self:start;width:170px;height:auto}
+  .hd{grid-column:2;grid-row:1;align-self:end;margin:0;font-size:28px;font-weight:800}
+  .sub{grid-column:2;grid-row:2;margin:6px 0 0 0;font-size:22px;font-weight:700;color:#000;line-height:1.8}
+  .sub small{font-weight:600;color:#333}
+  .rule{grid-column:1 / span 2;grid-row:3;align-self:start;margin-top:12px;border-top:1px solid var(--line);padding-top:18px;display:grid;grid-template-columns:46px 1fr;gap:16px}
+  .check{width:46px;height:46px}
+  .ruleText{font-size:20px;line-height:1.6;color:#111}
+  .counter{position:absolute;left:7%;bottom:7%;color:#666;font-size:16px}
+  .nav{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px;border-top:1px solid #eee;background:#fafafa}
+  .btn{border:1px solid #ddd;background:#fff;color:#111;padding:10px 14px;border-radius:10px;cursor:pointer}
+  .btn[disabled]{opacity:.5;cursor:not-allowed}
+  .dots{display:flex;gap:6px}
+  .dot{width:7px;height:7px;border-radius:50%;background:#ddd}
+  .dot.on{background:#111}
+  .tryBig{display:inline-block;background:var(--btn);color:#fff;border:none;border-radius:999px;padding:16px 34px;font-size:20px;font-weight:800;box-shadow:0 10px 36px rgba(255,59,48,.28);cursor:pointer;position:absolute;right:36px;bottom:36px}
+  /* DEMO minimal */
+  #demo{display:none;background:#000;color:#fff;padding:28px 18px 64px}
+  .demoWrap{max-width:1120px;margin:0 auto;position:relative}
+  .demoTop{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+  .brand{font-size:36px;font-weight:900;letter-spacing:0.2px}
+  .brand small{font-size:22px;font-weight:400;color:#d0d0d0;margin-left:10px}
+  .topKeys{display:flex;gap:14px}
+  .topKeys img{width:64px;height:64px;object-fit:contain;filter:drop-shadow(0 3px 4px rgba(0,0,0,.35))}
+  .surface{display:grid;grid-template-columns:1.25fr 220px;gap:24px;align-items:start}
+  .padWrap{background:#1a2230;border:none;min-height:520px;padding:0;border-radius:6px}
+  #pad{width:100%;min-height:520px;border:none;background:#1a2230;color:#fff;outline:none;padding:22px;margin:0;resize:none;font:28px/1.6 ui-monospace,Menlo,Consolas,monospace;border-radius:6px}
+  .note img{width:100%;height:auto;display:block;max-width:220px}
+.note{position:relative;max-width:220px}
+.noteText{
+  position:absolute; left:12%; top:45%; width:76%;
+  font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Arial;
+  font-size:16px;line-height:1.35;font-weight:700;color:#111;text-align:left;
+  text-shadow:0 1px 0 rgba(255,255,255,.4);
+  pointer-events:none;
+}
+</style>
+<style>:root{--ui-font:"Noto Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif}</style>
+
+</head>
+<body>
+<section class="hero">
+  <img src="img/thinkdifferent2.png" alt="background">
+  <button class="enter" id="heroBtn">Learn more</button>
+</section>
+
+<!-- Tutorial (all 6 slides, Try only on last) -->
+<div class="modal" id="modal">
+  <div class="sheet">
+
+    <div class="slide on" data-step="0">
+      <div class="s1-wrap">
+        <h1 class="title1">Features of UniQwerty</h1>
+        <div class="bullets">
+          <div>•&nbsp;&nbsp;No dead keys</div>
+          <div>•&nbsp;&nbsp;No Alt Gr</div>
+          <div>•&nbsp;&nbsp;No long press</div>
+        </div>
+        <img class="keysRow" src="img/5keys.png" alt="five triggers">
+        <div class="stepno">1/6</div>
+      </div>
+    </div>
+
+    <div class="slide" data-step="1">
+      <div class="frame">
+        <img class="keyIcon" src="img/grave.png" alt="Grave & Tilde keys">
+        <h3 class="hd">This key acts as an accent only in the following cases.</h3>
+        <p class="sub">• ` + vowel — <small>only when a vowel follows immediately (no space)</small><br>
+        • ~ + n — <small>only when n follows immediately (no space)</small></p>
+        <div class="rule">
+          <svg class="check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#10b981" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
+          <div class="ruleText">
+            In UniQwerty, only these two accent keys behave just as they look.<br>
+            We once tried to move them closer — without Shift — but no key was free enough.<br>
+            Luckily, they’re not used that often. Let’s call it a small mercy.
+          </div>
+        </div>
+        <div class="counter">2/6</div>
+      </div>
+    </div>
+
+    <div class="slide" data-step="2">
+      <div class="frame">
+        <img class="keyIcon" src="img/q.png" alt="q ligature key">
+        <h3 class="hd">This key acts as an accent only in the following cases.</h3>
+        <p class="sub">• q + a → æ<br>• q + o → œ<br><small>only when the vowel follows immediately (no space)</small></p>
+        <div class="rule">
+          <svg class="check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#10b981" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
+          <div class="ruleText">
+            You probably don’t know any words that contain <b>-qa-</b> or <b>-qo-</b>.<br>
+            So this combination safely serves only for accent input.
+          </div>
+        </div>
+        <div class="counter">3/6</div>
+      </div>
+    </div>
+
+    <div class="slide" data-step="3">
+      <div class="frame">
+        <img class="keyIcon" src="img/comma.png" alt="comma trigger key">
+        <h3 class="hd">This key acts as an accent only in the following cases.</h3>
+        <p class="sub">• , + vowel (a, e, i, o, u, y) — <small>only when the vowel follows immediately (no space)</small><br>
+        • , + c → ç — <small>only when c follows immediately (no space)</small></p>
+        <div class="rule">
+          <svg class="check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#10b981" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
+          <div class="ruleText">
+            You always insert a space after a comma in normal writing.<br>
+            Therefore, there’s absolutely no chance of conflict when you type a vowel right after it.
+          </div>
+        </div>
+        <div class="counter">4/6</div>
+      </div>
+    </div>
+
+    <div class="slide" data-step="4">
+      <div class="frame">
+        <img class="keyIcon" src="img/dot.png" alt="two dots trigger key">
+        <h3 class="hd">This key acts as an accent only in the following cases.</h3>
+        <p class="sub">• .. + vowel — <small>only when the vowel follows immediately (no space)</small></p>
+        <div class="rule">
+          <svg class="check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#10b981" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
+          <div class="ruleText">
+            When you type an ellipsis with two dots, you always add a space afterward.<br>
+            So this pattern never interferes with your regular writing.
+          </div>
+        </div>
+        <div class="counter">5/6</div>
+      </div>
+    </div>
+
+    <div class="slide" data-step="5">
+      <div class="frame">
+        <img class="keyIcon" src="img/semicolon.png" alt="semicolon trigger key">
+        <h3 class="hd">This key acts as an accent only in the following cases.</h3>
+        <p class="sub">• ; + vowel — <small>only when the vowel follows immediately (no space)</small></p>
+        <div class="rule">
+          <svg class="check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#10b981" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
+          <div class="ruleText">
+            You always insert a space after a semicolon.<br>
+            Therefore, it never conflicts with typing a circumflex accent.<br><br>
+			(In some programming languages, the semicolon marks the end of a statement.<br>
+It’s a good habit to leave a space after it.)
+          </div>
+        </div>
+        <button class="tryBig" id="tryBig">Try it now</button>
+        <div class="counter">6/6</div>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button id="prev" class="btn" disabled>Prev</button>
+      <div class="dots" id="dots"></div>
+      <div>
+        <button id="close" class="btn" style="margin-right:8px">Close</button>
+        <button id="next" class="btn">Next</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- DEMO -->
+<section id="demo">
+  <div class="demoWrap">
+    <div class="demoTop">
+      <div class="brand">UniQwerty.<small> One keyboard, all languages</small></div>
+      <div class="topKeys">
+        <img src="img/grave.png" alt="grave">
+        <img src="img/q.png" alt="q">
+        <img src="img/comma.png" alt="comma">
+        <img src="img/dot.png" alt="dot">
+        <img src="img/semicolon.png" alt="semicolon">
+      </div>
+    </div>
+    <div class="surface">
+      <div class="padWrap">
+        <textarea id="pad" placeholder="Type here..." spellcheck="false"></textarea>
+      </div>
+      <div class="note">
+  <img src="img/note.png" alt="note area">
+  <div class="noteText">The UniQwerty Beta Program is launching soon.<br><br>It turns your QWERTY into UniQwerty.</div>
+</div>
+    </div>
+  </div>
+</section>
+
+<script>
+// Modal & navigation
+const heroBtn=document.getElementById('heroBtn');
+const modal=document.getElementById('modal');
+const slides=[...document.querySelectorAll('.slide')];
+const prev=document.getElementById('prev');
+const next=document.getElementById('next');
+const closeBtn=document.getElementById('close');
+const dots=document.getElementById('dots');
+const tryBig=document.getElementById('tryBig');
+const demo=document.getElementById('demo');
+
+function openModal(){document.body.style.overflow='hidden';modal.classList.add('on');show(0);}
+function closeModal(){modal.classList.remove('on');document.body.style.overflow='';}
+function openDemo(){closeModal();demo.style.display='block';window.scrollTo({top:demo.offsetTop,behavior:'smooth'}); localStorage.setItem('uq_seen_tutorial', '1'); }
+
+heroBtn.addEventListener('click',openModal);
+document.addEventListener('keydown', (e) => {
+  // 🔒 입력 필드/에디터 안이면 전역 단축키 비활성화
+  const tag = (e.target?.tagName || '').toLowerCase();
+  const isEditable = e.target?.isContentEditable || tag === 'textarea' || tag === 'input' || tag === 'select';
+  if (isEditable) return;
+
+  if (e.key === 'Enter' && !modal.classList.contains('on')) {
+    e.preventDefault();
+    if (window.UQ_IS_SEEN) {
+      window.scrollTo({ top: demo.offsetTop, behavior: 'smooth' });
+    } else {
+      openModal();
+    }
+    return;
+  }
+
+  if (modal.classList.contains('on')) {
+    if (e.key === 'Enter')      { e.preventDefault(); if (i < slides.length - 1) show(i + 1); else openDemo(); }
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); show(i - 1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); if (i < slides.length - 1) show(i + 1); else openDemo(); }
+    if (e.key === 'Escape')     { e.preventDefault(); closeModal(); }
+  }
+});
+
+if(tryBig) tryBig.addEventListener('click',openDemo);
+
+let i=0;
+function renderDots(){dots.innerHTML=''; for(let k=0;k<slides.length;k++){const d=document.createElement('div');d.className='dot'+(k===i?' on':'');dots.appendChild(d);}}
+function show(n){i=Math.max(0,Math.min(slides.length-1,n));slides.forEach((el,idx)=>el.classList.toggle('on',idx===i));prev.disabled=(i===0);next.disabled=(i===slides.length-1);renderDots();}
+prev.addEventListener('click',()=>show(i-1));
+next.addEventListener('click',()=>show(i+1));
+closeBtn.addEventListener('click',closeModal);
+
+// 기존 즉시실행 함수 전체 교체
+(function(){
+  const SEEN_KEY = 'uq_seen_tutorial';
+  const seen = localStorage.getItem(SEEN_KEY) === '1';
+  const btn = document.getElementById('heroBtn');
+
+  window.UQ_IS_SEEN = seen;
+
+  // 버튼 라벨 고정
+  btn.textContent = 'Learn more';
+
+  if (seen) {
+    // 재방문: 페이지 로드 즉시 데모를 열어 둬서 스크롤 가능하게
+    demo.style.display = 'block';
+    document.body.style.overflow = '';   // 혹시 잠겨있으면 해제
+    btn.onclick = () => {
+      window.scrollTo({ top: demo.offsetTop, behavior: 'smooth' });
+    };
+  } else {
+  // 첫 방문자: 스크롤 막기
+  document.body.style.overflow = 'hidden';
+  btn.onclick = openModal;
+  }
+})();
+
+
+
+
+
+</script>
+
+<!-- Attach original JS logic, then clear any prefilled guide text -->
+<script>
+
+(() => {
+  const pad = document.getElementById('pad');
+
+  const vowels = 'aeiouyAEIOUY';
+  const mapAcute = {'a':'á','e':'é','i':'í','o':'ó','u':'ú','y':'ý','A':'Á','E':'É','I':'Í','O':'Ó','U':'Ú','Y':'Ý'};
+  const mapGrave = {'a':'à','e':'è','i':'ì','o':'ò','u':'ù','A':'À','E':'È','I':'Ì','O':'Ò','U':'Ù'};
+  const mapCirc  = {'a':'â','e':'ê','i':'î','o':'ô','u':'û','y':'ŷ','A':'Â','E':'Ê','I':'Î','O':'Ô','U':'Û','Y':'Ŷ'};
+  const mapTrema = {'a':'ä','e':'ë','i':'ï','o':'ö','u':'ü','y':'ÿ','A':'Ä','E':'Ë','I':'Ï','O':'Ö','U':'Ü','Y':'Ÿ'};
+
+  // ---- caret utils
+  const sel = el => ({start: el.selectionStart, end: el.selectionEnd, val: el.value});
+  const setCaret = (el, p) => { el.selectionStart = el.selectionEnd = p; };
+  const countTrailing = (el, ch) => {
+    const {start, val} = sel(el); let i=start-1, c=0; while(i>=0 && val[i]===ch){c++; i--;} return c;
+  };
+  const hasTrailingOne = (el, ch) => {
+    const {start, val} = sel(el); return start>0 && val[start-1]===ch;
+  };
+  function replaceRange(el, from, to, text){
+    const {val} = sel(el);
+    el.value = val.slice(0, from) + text + val.slice(to);
+    setCaret(el, from + text.length);
+  }
+
+  // ---- undo (Esc) : snapshot last transform only
+  let lastUndo = null;
+  function snapshot() {
+    const {start, end, val} = sel(pad);
+    lastUndo = {val, start};
+  }
+function restore() {
+  if (!lastUndo) return;
+
+  // 1) 저장해 둔 스냅샷으로 되돌림
+  pad.value = lastUndo.val;
+  setCaret(pad, lastUndo.start);
+
+  // 2) 복구 직후 “다음 1타만” 같은 모음이면 변환 무시하도록 플래그 장전
+  //    (lastTransform는 2번 단계에서 각 변환 분기에서 채워둔 메타)
+  bypassOnce = lastTransform ? { ...lastTransform } : null;
+
+  // 3) 한 번만 쓰는 스냅샷 비우기
+  lastUndo = null;
+}
+
+// ---- smart-bypass state (post-restore용 메타 & 1회성 바이패스 플래그)
+let lastTransform = null;   // { trigger: string, target: string, posAfterTrigger: number }
+let bypassOnce    = null;   // { trigger: string, target: string, posAfterTrigger: number }
+
+  pad.addEventListener('keydown', (ev) => {
+	if (ev.key === 'Enter') return; // 기본 엔터 입력 허용
+    if (ev.key === 'Escape') { ev.preventDefault(); restore(); return; }
+    if (ev.ctrlKey || ev.metaKey || ev.altKey) return;
+	
+	if (lastUndo && ev.key !== 'Backspace' && ev.key !== 'Escape') {
+    lastUndo = null;
+  }
+	
+  if (ev.key === 'Backspace' && lastUndo) {
+    ev.preventDefault();   // 기본 삭제 막고
+    restore();             // ← Esc와 같은 복구 실행
+    return;                // 이후 변환 분기들로 안 내려감
+  }	
+	
+    const k = ev.key;
+    if (k.length !== 1) return;
+	
+// ---- one-shot bypass: restore 직후 동일 모음/타겟은 변환 무시 ----
+if (bypassOnce) {
+  const k = ev.key;                 // 방금 누른 키(문자 1개)
+  const { posAfterTrigger, target } = bypassOnce;
+
+  // 커서가 트리거 바로 뒤에 있고, 이번 키가 '동일 타겟(대/소문자 구분)'이면 개입 금지
+  if (pad.selectionStart === posAfterTrigger && k === target) {
+    bypassOnce = null;              // 1회성 소모
+    return;                         // 아무 변환도 하지 않고 그대로 통과
+  }
+  // 위치가 달라졌거나 다른 키면 바이패스 해제하고 평소 로직 진행
+  bypassOnce = null;
+}
+
+// ------ LIGATURES: q + o/a/O/A → œ/æ/Œ/Æ ------
+if ((k === 'o' || k === 'O' || k === 'a' || k === 'A') && hasTrailingOne(pad, 'q')) {
+  ev.preventDefault(); snapshot();
+  const { start } = sel(pad);
+  const isUpper = (k === 'O' || k === 'A');
+  const out = (k === 'o' || k === 'O')
+    ? (isUpper ? 'Œ' : 'œ')
+    : (isUpper ? 'Æ' : 'æ');
+
+  // 최근 변환 메타 (복구·바이패스용)
+  lastTransform = { trigger: 'q', target: k, posAfterTrigger: (start - 1) + 1 };
+
+  replaceRange(pad, start - 1, start, out);
+  return;
+}
+
+
+    // ------ CEDILLA: ',' + c/C → ç/Ç (consume only ONE comma; keep earlier commas)
+    if ((k==='c'||k==='C') && countTrailing(pad, ',') >= 1) {
+      ev.preventDefault(); snapshot();
+      const cnt = countTrailing(pad, ',');         // e.g., 1,2,3...
+      const keep = Math.max(0, cnt-1);             // keep first (cnt-1) commas
+      const {start, val} = sel(pad);
+      const left = val.slice(0, start - cnt) + ','.repeat(keep);
+      const right = val.slice(start);
+      const out = (k==='C') ? 'Ç' : 'ç';
+	  lastTransform = { trigger: ',', target: k, posAfterTrigger: (start - cnt) + keep + 1 };
+      pad.value = left + out + right;
+      setCaret(pad, left.length + out.length);
+      return;
+    }
+
+    // ------ TILDE: '~' + n/N → ñ/Ñ
+    if ((k==='n'||k==='N') && hasTrailingOne(pad,'~')) {
+      ev.preventDefault(); snapshot();
+      const {start} = sel(pad);
+	  lastTransform = { trigger: '~', target: k, posAfterTrigger: (start - 1) + 1 };
+	  replaceRange(pad, start-1, start, (k==='N') ? 'Ñ' : 'ñ');
+      return;
+    }
+
+    // ------ TREMA: '..' + vowel → trema; if '...'+vowel, keep 1 dot (..ë rule)
+    if (vowels.includes(k) && countTrailing(pad, '.') >= 2) {
+      ev.preventDefault(); snapshot();
+      const cnt = countTrailing(pad, '.');           // 2,3,4...
+      const keep = Math.max(0, cnt-2);               // keep (cnt-2) dots
+      const {start, val} = sel(pad);
+      const left = val.slice(0, start - cnt) + '.'.repeat(keep);
+      const right = val.slice(start);
+      const out = mapTrema[k] || k;
+	  lastTransform = { trigger: '..', target: k, posAfterTrigger: (start - cnt) + keep + 2 };
+      pad.value = left + out + right;
+      setCaret(pad, left.length + out.length);
+      return;
+    }
+
+    // ------ ACUTE: ',' + vowel → acute; if ',,' + vowel, keep first comma → ',é'
+    if (vowels.includes(k) && countTrailing(pad, ',') >= 1) {
+      ev.preventDefault(); snapshot();
+      const cnt = countTrailing(pad, ',');           // 1 or more
+      const keep = Math.max(0, cnt-1);               // keep (cnt-1) commas
+      const {start, val} = sel(pad);
+      const left = val.slice(0, start - cnt) + ','.repeat(keep);
+      const right = val.slice(start);
+      const out = mapAcute[k] || k;
+	  
+	    // ---- [추가된 부분 시작] ----
+  // 직전 변환 메타 저장
+  lastTransform = {
+    trigger: ',',
+    target: k,
+    posAfterTrigger: (start - cnt) + keep + 1 // 트리거 바로 뒤 커서 예상 위치
+  };
+  // ---- [추가된 부분 끝] ----
+	  
+      pad.value = left + out + right;
+      setCaret(pad, left.length + out.length);
+      return;
+    }
+
+    // ------ CIRCUMFLEX: ';' + vowel → circ; if ';;'+vowel, keep first ';' → ';ô'
+    if (vowels.includes(k) && countTrailing(pad, ';') >= 1) {
+      ev.preventDefault(); snapshot();
+      const cnt = countTrailing(pad, ';');
+      const keep = Math.max(0, cnt-1);
+      const {start, val} = sel(pad);
+      const left = val.slice(0, start - cnt) + ';'.repeat(keep);
+      const right = val.slice(start);
+      const out = mapCirc[k] || k;
+	  
+	  lastTransform = { trigger: ';', target: k, posAfterTrigger: (start - cnt) + keep + 1 };
+	  
+      pad.value = left + out + right;
+      setCaret(pad, left.length + out.length);
+      return;
+    }
+
+    // ------ GRAVE: '`' + (a e i o u / upper) → grave
+    if ((k==='a'||k==='e'||k==='i'||k==='o'||k==='u'||k==='A'||k==='E'||k==='I'||k==='O'||k==='U') && hasTrailingOne(pad,'`')) {
+      ev.preventDefault(); snapshot();
+      const {start} = sel(pad);
+      const out = mapGrave[k] || k;
+	  lastTransform = { trigger: '`', target: k, posAfterTrigger: (start - 1) + 1 };
+      replaceRange(pad, start-1, start, out);
+      return;
+    }
+
+    // default: plain insert
+  });
+})();
+
+</script>
+<script>
+// After original logic loads, clear any prefilled demo hints
+window.addEventListener('load', function(){
+  var ta = document.getElementById('pad');
+  if(ta) ta.value = "";
+});
+</script>
+
+<!-- ===== Reviews: Accents Libres (copied style) ===== -->
+<section id="reviews" style="background:#f3f1e7; padding:64px 0; font-family:var(--ui-font);">
+  <h2 style="text-align:center; font-size:42px; margin:0 0 12px; color:#000;">Leave a Review</h2>
+  <p style="text-align:center; margin:0 0 28px; line-height:1.6; color:#333;">
+    No Dead Keys. No Alt Gr. No Long Press.
+  </p>
+
+  <!-- form -->
+  <div style="max-width:760px; margin:0 auto; background:#fff; border-radius:14px; padding:20px; box-shadow:0 2px 8px rgba(0,0,0,.06);">
+    <form id="reviewForm" style="display:grid; grid-template-columns:1fr 200px; gap:12px 16px; align-items:center;">
+      <input id="rvName" type="text" placeholder="Nickname (optional)" style="grid-column:1/2; height:46px; border:1px solid #ddd; border-radius:10px; padding:0 12px; font-size:16px;">
+      <div style="grid-column:2/3; display:flex; align-items:center; gap:8px; justify-content:flex-end;">
+        <span style="font-size:14px; color:#666;">Rating</span>
+        <div id="rvStars" aria-label="rating" style="display:flex; cursor:pointer; font-size:24px; line-height:1;"></div>
+      </div>
+      <!-- spam honeypot -->
+      <input id="rvHoney" style="display:none">
+
+      <textarea id="rvText" required placeholder="Leave your review (required)" style="grid-column:1/3; min-height:120px; border:1px solid #ddd; border-radius:10px; padding:12px; font-size:16px; resize:vertical;"></textarea>
+      <button type="submit" style="grid-column:1/3; height:48px; border:0; border-radius:10px; font-size:16px; font-weight:700; background:#222; color:#fff; cursor:pointer;">Submit</button>
+      <div style="grid-column:1/3; font-size:13px; color:#777; text-align:right;">Nickname is optional, but the rating and review are required.</div>
+    </form>
+  </div>
+
+  <!-- list -->
+  <div id="rvList" style="max-width:760px; margin:24px auto 0; display:flex; flex-direction:column; gap:16px;"></div>
+</section>
+
+<script>
+(function(){
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxVpQzLFf1V9hKBtIpOBnlv5XDRiAzZVxE5ybaWWMWNmq9tkPSfFVIBDIAie2uoJ6Tf/exec';
+  const $reviewsSec = document.getElementById('reviews');
+  const $form  = document.getElementById('reviewForm');
+  const $name  = document.getElementById('rvName');
+  const $text  = document.getElementById('rvText');
+  const $stars = document.getElementById('rvStars');
+  let   $list  = document.getElementById('rvList') || document.getElementById('reviewList') || ($reviewsSec && $reviewsSec.querySelector('ul'));
+
+  if (!$list && $reviewsSec) {
+    $list = document.createElement('ul');
+    $list.id = 'reviewList';
+    $list.style.listStyle='none';
+    $list.style.padding='0';
+    $list.style.margin='0';
+    $list.style.display='grid';
+    $list.style.gap='12px';
+    $reviewsSec.appendChild($list);
+  }
+
+  if (!$reviewsSec || !$form || !$stars || !$list) return;
+
+  let starVal = 0;
+  function renderStars(v){
+    $stars.innerHTML='';
+    for(let i=1;i<=5;i++){
+      const s=document.createElement('span');
+      s.textContent=i<=v?'★':'☆';
+      s.style.color=i<=v?'#f7b500':'#ccc';
+      s.style.fontSize='20px';
+      s.style.marginLeft=i===1?'0':'2px';
+      s.dataset.v=i;
+      $stars.appendChild(s);
+    }
+  }
+  $stars.addEventListener('mousemove',e=>{const t=e.target.closest('span'); if(t) renderStars(+t.dataset.v);});
+  $stars.addEventListener('mouseleave',()=>renderStars(starVal||0));
+  $stars.addEventListener('click',e=>{const t=e.target.closest('span'); if(!t) return; starVal=+t.dataset.v; renderStars(starVal);});
+  renderStars(0);
+
+  function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+  function cardHTML(it){
+    const st=Math.max(0,Math.min(5,parseInt(it.stars||'0',10)||0));
+    const star='★'.repeat(st)+'☆'.repeat(5-st);
+    const name=it.name||'Anonyme';
+    const text=it.text||'';
+    return `<div style="background:#f3f1e7;border-radius:14px;padding:18px;">
+              <div style="color:#f7b500;font-size:18px;line-height:1">${star}</div>
+              <div style="font-size:18px;margin-top:6px;color:#000">${escapeHtml(text)}</div>
+              <div style="font-size:14px;color:#777;margin-top:8px">— ${escapeHtml(name)}</div>
+            </div>`;
+  }
+
+  window.__onReviews = function(arr){
+    try{
+      const ordered=Array.isArray(arr)?arr.slice().reverse():[];
+      $list.innerHTML = ordered.map(cardHTML).join('');
+      if (window.setReviewCount) window.setReviewCount(ordered.length);
+    }catch(e){}
+  };
+
+  function loadReviewsJSONP(){
+    const s=document.createElement('script');
+    s.src = SCRIPT_URL + '?n=20&callback=__onReviews&ts=' + Date.now();
+    document.head.appendChild(s);
+  }
+  document.addEventListener('DOMContentLoaded', loadReviewsJSONP);
+
+  $form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    if (document.getElementById('rvHoney')?.value) return;
+    const name=($name&&$name.value||'').trim()||'Anonyme';
+    const text=($text&&$text.value||'').trim();
+    if(!starVal){alert('Choisissez une note.');return;}
+    if(!text){alert('Saisissez votre avis.');return;}
+    const item={name, stars:starVal, text};
+    $list.insertAdjacentHTML('afterbegin', cardHTML(item));
+    try{
+      await fetch(SCRIPT_URL,{method:'POST', mode:'no-cors', body: JSON.stringify(item)});
+      setTimeout(loadReviewsJSONP, 1200);
+    }catch(e){}
+    if($name) $name.value='';
+    if($text) $text.value='';
+    starVal=0; renderStars(0);
+  });
+})();
+</script>
+
+<style>
+  /* Dock styles */
+  #reviewsDock{
+    max-width:1120px; margin:10px auto 4px;
+    display:flex; justify-content:center; align-items:center;
+  }
+  #reviewsCue{
+    position:relative;
+    padding:8px 14px; border-radius:999px;
+    background:rgba(0,0,0,.65); color:#fff;
+    font:600 14px var(--ui-font);
+    display:flex; align-items:center; gap:8px;
+    cursor:pointer; pointer-events:auto;
+    backdrop-filter:saturate(1.2) blur(2px);
+    box-shadow:0 4px 10px rgba(0,0,0,.25);
+  }
+  #reviewsCue .chev{font-size:14px; line-height:1;}
+</style>
+<script>
+// Dock injector adapted for UniQwerty index: attach below .demoWrap
+(function(){
+  const reviews = document.getElementById('reviews');
+  const demoWrap = document.querySelector('.demoWrap');
+  if(!reviews || !demoWrap) return;
+
+  // remove existing cue if any
+  document.getElementById('reviewsCue')?.remove();
+  document.getElementById('reviewsDock')?.remove();
+
+  const dock = document.createElement('div');
+  dock.id = 'reviewsDock';
+  dock.style.cssText = 'max-width:1120px;margin:16px auto 34px;display:flex;justify-content:center;';
+  const cue = document.createElement('div');
+  cue.id = 'reviewsCue';
+  cue.innerHTML = '<span class="chev">▼</span><span id="rvCueText">View Reviews</span>';
+  cue.addEventListener('click',()=>reviews.scrollIntoView({behavior:'smooth', block:'start'}));
+  dock.appendChild(cue);
+
+  // insert after demoWrap
+  demoWrap.parentNode.insertBefore(dock, demoWrap.nextSibling);
+
+  window.setReviewCount = function(n){
+    const el = document.getElementById('rvCueText');
+    if (el) el.textContent = n ? `View Reviews (${n})` : 'Voir les avis';
+  };
+})();
+</script>
+<footer style="
+  background:#f2f0e6;
+  padding:28px 0;
+  font-family:var(--ui-font);
+  text-align:center;
+  font-size:15px;
+  color:#555;
+  border-top:1px solid #ddd;
+">
+  <div>UniQwerty © 2025</div>
+  <div style="margin-top:6px;">
+    Contact : <a href="mailto:contact@UniQwerty.com" style="color:#333;text-decoration:none;">contact@UniQwerty.com</a>
+  </div>
+</footer>
+</body>
+</html>
+</body>
+</html>
