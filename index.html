@@ -744,5 +744,28 @@ window.addEventListener('load', function(){
 </footer>
 </body>
 </html>
+<style>
+@media (max-width: 768px){
+  /* HERO 영역: 이미지 잘림 방지 */
+  .hero{ min-height:auto; padding:16px 0; display:flex; flex-direction:column; align-items:center; }
+  .hero img{
+    position:static !important;   /* 절대배치 해제 */
+    inset:auto !important;
+    width:100% !important;
+    height:auto !important;
+    object-fit:contain !important; /* 잘림 없이 축소 */
+    object-position:center top !important;
+    max-height:70vh;               /* 화면 넘치지 않게 */
+  }
+  /* 버튼은 이미지 아래로 */
+  .hero .enter{
+    position:static !important;
+    margin-top:12px;
+    padding:12px 20px;
+    font-size:16px;
+  }
+}
+</style>
+
 </body>
 </html>
