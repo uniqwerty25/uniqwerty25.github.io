@@ -11,7 +11,7 @@
   /* HERO */
   .hero{position:relative;min-height:100vh;overflow:hidden}
   .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-  .hero .enter{position:absolute;right:5vw;bottom:8vh;background:var(--btn);color:#fff;border:none;border-radius:999px;padding:16px 28px;font-size:18px;cursor:pointer}
+  .hero .enter{position:absolute;right:5vw;bottom:8vh;background:var(--btn);color:#fff;font-weight:700;border:none;border-radius:999px;padding:16px 28px;font-size:18px;cursor:pointer}
   /* MODAL */
   .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.65);backdrop-filter:blur(3px);z-index:50}
   .modal.on{display:flex}
@@ -832,6 +832,109 @@ html, body { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   .nav{ position:sticky; bottom:0; z-index:2; }
 }
 </style>
+
+
+
+<script>
+// ===== Gentle Snap: DEMO <-> REVIEWS (revisit only) =====
+(function(){
+  const SEEN = window.UQ_IS_SEEN === true || localStorage.getItem('uq_seen_tutorial') === '1';
+  const demo = document.getElementById('demo');
+  const reviews = document.getElementById('reviews');
+  if (!SEEN || !demo || !reviews) return;
+
+  window.addEventListener('load', () => {
+    let snapping = false;
+    let idleTO = null;
+    let lastInteractAt = 0;
+
+    const hero = document.querySelector('.hero');
+
+    function anchorPos(el){ return el ? el.offsetTop : 0; }
+    function heroBottom(){
+      return hero ? (hero.offsetTop + hero.offsetHeight) : 0;
+    }
+
+    function getAnchors(){
+      const demoTop = anchorPos(demo);
+      const revTop  = anchorPos(reviews);
+      return { demoTop, revTop };
+    }
+
+    // Only decide to snap when user STOPS interacting for a short moment.
+    function nudgeSnapSoon(delay=140){
+      if (snapping) return;
+      if (idleTO) clearTimeout(idleTO);
+      idleTO = setTimeout(checkAndSnap, delay);
+    }
+
+    // Heuristic: snap only if user is near an anchor (within 35% of viewport).
+    function checkAndSnap(){
+      const y  = window.scrollY || window.pageYOffset;
+      const vh = window.innerHeight || 0;
+      const { demoTop, revTop } = getAnchors();
+
+	// ✅ 리뷰 섹션부터는 스냅 비활성화 (여유 60px 버퍼)
+	if (y >= revTop - 60) return;
+
+      // If still actively interacting very recently, skip.
+      if (Date.now() - lastInteractAt < 80) return;
+
+      const near = (target)=> Math.abs(y - target) <= vh * 0.35;
+
+      const isNearDemo = near(demoTop);
+      const isNearRev  = near(revTop);
+
+      // If in between and not near either, do nothing.
+      if (!isNearDemo && !isNearRev) return;
+
+      // Choose nearest target.
+      const target = (Math.abs(y - demoTop) <= Math.abs(y - revTop)) ? demoTop : revTop;
+
+      // If already basically there, skip.
+      if (Math.abs(y - target) < 6) return;
+
+      doSnap(target);
+    }
+
+    function doSnap(targetY){
+      snapping = true;
+      window.scrollTo({ top: targetY, behavior: 'smooth' });
+      // Release after motion
+      const release = () => { snapping = false; window.removeEventListener('scroll', onDuringSnap); };
+      let checks = 0;
+      const onDuringSnap = () => {
+        const y = window.scrollY || window.pageYOffset;
+        if (Math.abs(y - targetY) < 2 || checks++ > 24) release();
+      };
+      window.addEventListener('scroll', onDuringSnap);
+      setTimeout(release, 600);
+    }
+
+    function markInteract(){
+      lastInteractAt = Date.now();
+    }
+
+    // Inputs we consider: wheel/touch/keys
+    window.addEventListener('wheel',   () => { markInteract(); nudgeSnapSoon(160); }, { passive:true });
+    window.addEventListener('touchmove', markInteract, { passive:true });
+    window.addEventListener('touchend',  () => { markInteract(); nudgeSnapSoon(140); }, { passive:true });
+
+    window.addEventListener('keydown', (e) => {
+      // Arrow/PageUp/PageDown/Space/Home/End typical scroll keys
+      const keys = ['ArrowDown','ArrowUp','PageDown','PageUp','Space','Home','End'];
+      if (keys.includes(e.code) || keys.includes(e.key)) {
+        markInteract();
+        nudgeSnapSoon(180);
+      }
+    }, { passive:true });
+
+    // Also run a gentle check after load if landing near anchors.
+    nudgeSnapSoon(280);
+  });
+})();
+</script>
+
 
 </body>
 </html>
