@@ -47,6 +47,9 @@
   .brand small{font-size:22px;font-weight:400;color:#d0d0d0;margin-left:10px}
   .topKeys{display:flex;gap:14px}
   .topKeys img{width:64px;height:64px;object-fit:contain;filter:drop-shadow(0 3px 4px rgba(0,0,0,.35))}
+  .topKeys {
+  transform: translateX(-220px); /* 왼쪽으로 이동 */
+}
   .surface{display:grid;grid-template-columns:1.25fr 220px;gap:24px;align-items:start}
   .padWrap{background:#1a2230;border:none;min-height:520px;padding:0;border-radius:6px}
   #pad{width:100%;min-height:520px;border:none;background:#1a2230;color:#fff;outline:none;padding:22px;margin:0;resize:none;font:28px/1.6 ui-monospace,Menlo,Consolas,monospace;border-radius:6px}
@@ -145,7 +148,7 @@
 
     <div class="slide on" data-step="0">
       <div class="s1-wrap">
-        <h1 class="title1">UniQwerty / Parallel Layout</h1>
+        <h1 class="title1">UniQwerty / Parallel Accents</h1>
         <div class="bullets">
           <div>&nbsp;&nbsp;</div>
 		  <div>•&nbsp;&nbsp;No Dead Keys. No Shift. No AltGr. No Long Press.</div>
@@ -158,49 +161,13 @@
       </div>
     </div>
 
-    <div class="slide" data-step="1">
-      <div class="frame">
-        <img class="keyIcon" src="img/grave.png" alt="Grave & Tilde keys">
-        <h3 class="hd">How to use this key</h3>
-        <p class="sub">`+aeiou → àèìòù <small></small><br>
-        `+n → ñ <small>(Shift is not required)</small><br>
-		Otherwise, it stays as the symbol itself.</p>
-        <div class="rule">
-          <svg class="check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#10b981" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
-          <div class="ruleText">
-            You don’t need to press Shift to type “~” for ñ/Ñ.<br>
-			Your grave input(`) is always entered as the accent grave(`) before aeiou, but as the accent tilde(~) before n, and as the symbol grave in all other cases.<br>
-			This is what the Parallel Layout is about.
-          </div>
-        </div>
-        <div class="counter">2/7</div>
-      </div>
-    </div>
-
-    <div class="slide" data-step="2">
-      <div class="frame">
-        <img class="keyIcon" src="img/q.png" alt="q ligature key">
-        <h3 class="hd">How to use this key</h3>
-        <p class="sub">q+a → æ<br>q+o → œ<br><small></small>
-		Otherwise, it stays as just q</p>
-        <div class="rule">
-          <svg class="check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#10b981" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
-          <div class="ruleText">
-            You probably don’t know any words that contain <b>-qa-</b> or <b>-qo-</b>.<br>
-            So this combination safely serves only for accent input.
-          </div>
-        </div>
-        <div class="counter">3/7</div>
-      </div>
-    </div>
 
     <div class="slide" data-step="3">
       <div class="frame">
         <img class="keyIcon" src="img/comma.png" alt="comma trigger key">
         <h3 class="hd">How to use this key</h3>
         <p class="sub">,+aeiouy → áéíóúý <small></small><br>
-        ,+c → ç <small></small><br>
-		Otherwise, it stays as comma.</p>
+        Otherwise, it stays as comma.</p>
         <div class="rule">
           <svg class="check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#10b981" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
           <div class="ruleText">
@@ -208,7 +175,7 @@
             Therefore, there’s absolutely no chance of conflict when you type a vowel right after it.
           </div>
         </div>
-        <div class="counter">4/7</div>
+        <div class="counter">2/7</div>
       </div>
     </div>
 
@@ -225,7 +192,7 @@
             So this pattern never interferes with your regular writing.
           </div>
         </div>
-        <div class="counter">5/7</div>
+        <div class="counter">3/7</div>
       </div>
     </div>
 
@@ -234,6 +201,7 @@
         <img class="keyIcon" src="img/semicolon.png" alt="semicolon trigger key">
         <h3 class="hd">How to use this key</h3>
         <p class="sub">;+aeiouy → âêîôûŷ <small></small><br>
+		;+c → ç <small></small><br>
 		Otherwise, it stays as semicolon.</p>
         <div class="rule">
           <svg class="check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#10b981" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
@@ -244,21 +212,58 @@
 It’s a good habit to leave a space after it.)
           </div>
         </div>
-        <div class="counter">6/7</div>
+        <div class="counter">4/7</div>
       </div>
     </div>
+
+    <div class="slide" data-step="2">
+      <div class="frame">
+        <img class="keyIcon" src="img/q.png" alt="q ligature key">
+        <h3 class="hd">How to use this key</h3>
+        <p class="sub">q+a → æ<br>q+o → œ<br><small></small>
+		Otherwise, it stays as just q</p>
+        <div class="rule">
+          <svg class="check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#10b981" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
+          <div class="ruleText">
+            You probably don’t know any words that contain <b>-qa-</b> or <b>-qo-</b>.<br>
+            So this combination safely serves only for accent input.
+          </div>
+        </div>
+        <div class="counter">5/7</div>
+      </div>
+    </div>
+
+    <div class="slide" data-step="1">
+      <div class="frame">
+        <img class="keyIcon" src="img/grave.png" alt="Grave & Tilde keys">
+        <h3 class="hd">How to use this key</h3>
+        <p class="sub">`+aeiou → àèìòù <small></small><br>
+        `+n → ñ <small>(Shift is not required)</small><br>
+		Otherwise, it stays as the symbol itself.</p>
+        <div class="rule">
+          <svg class="check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#10b981" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
+          <div class="ruleText">
+            You don’t need to press Shift to type “~” for ñ/Ñ.<br>
+			Your grave input(`) is always entered as the accent grave(`) before aeiou, but as the accent tilde(~) before n, and as the symbol grave in all other cases.<br>
+			This is what the Parallel Accents is about.
+          </div>
+        </div>
+        <div class="counter">6/7</div>
+      </div>
+    </div>	
 	
     <div class="slide" data-step="6">
       <div class="frame">
         <img class="keyIcon" src="img/tip.png" alt="semicolon trigger key">
         <h3 class="hd">Tip for Developers</h3>
         <p class="sub">Q. Does UniQwerty cause any issues while coding? <small></small><br>
-		A. Almost none.</p>
+		A. Don't worry.</p>
         <div class="rule">
           <svg class="check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#10b981" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
           <div class="ruleText">
-            Leave a space after commas and semicolons.<br>
-            If a backtick (`) ever triggers an accent, just press Backspace once — then retype it, and it’ll stay as plain text.
+            Always leave a space after commas and semicolons, just as you normally would.<br><br>
+            The grave key specifically has a developer option.<br>
+When this option is enabled, you can type the plain grave symbol instead of the grave accent by pressing `+Space.
           </div>
         </div>
         <button class="tryBig" id="tryBig">Try it now</button>
@@ -282,13 +287,13 @@ It’s a good habit to leave a space after it.)
 <section id="demo">
   <div class="demoWrap">
     <div class="demoTop">
-      <div class="brand">UniQwerty<small> Feel the Parallel Layout</small></div>
-      <div class="topKeys">
-        <img src="img/grave.png" alt="grave">
-        <img src="img/q.png" alt="q">
+      <div class="brand">UniQwerty<small> Feel the Parallel Accents</small></div>
+      <div class="topKeys">        
         <img src="img/comma.png" alt="comma">
         <img src="img/dot.png" alt="dot">
         <img src="img/semicolon.png" alt="semicolon">
+		<img src="img/q.png" alt="q">
+		<img src="img/grave.png" alt="grave">
       </div>
     </div>
     <div class="surface">
@@ -488,21 +493,21 @@ if ((k === 'o' || k === 'O' || k === 'a' || k === 'A') && hasTrailingOne(pad, 'q
   return;
 }
 
+// ------ CEDILLA: ';' + c/C → ç/Ç (consume only ONE semicolon; keep earlier semicolons)
+if ((k==='c'||k==='C') && countTrailing(pad, ';') >= 1) {
+  ev.preventDefault(); snapshot();
+  const cnt = countTrailing(pad, ';');
+  const keep = Math.max(0, cnt-1);
+  const {start, val} = sel(pad);
+  const left = val.slice(0, start - cnt) + ';'.repeat(keep);
+  const right = val.slice(start);
+  const out = (k==='C') ? 'Ç' : 'ç';
+  lastTransform = { trigger: ';', target: k, posAfterTrigger: (start - cnt) + keep + 1 };
+  pad.value = left + out + right;
+  setCaret(pad, left.length + out.length);
+  return;
+}
 
-    // ------ CEDILLA: ',' + c/C → ç/Ç (consume only ONE comma; keep earlier commas)
-    if ((k==='c'||k==='C') && countTrailing(pad, ',') >= 1) {
-      ev.preventDefault(); snapshot();
-      const cnt = countTrailing(pad, ',');         // e.g., 1,2,3...
-      const keep = Math.max(0, cnt-1);             // keep first (cnt-1) commas
-      const {start, val} = sel(pad);
-      const left = val.slice(0, start - cnt) + ','.repeat(keep);
-      const right = val.slice(start);
-      const out = (k==='C') ? 'Ç' : 'ç';
-	  lastTransform = { trigger: ',', target: k, posAfterTrigger: (start - cnt) + keep + 1 };
-      pad.value = left + out + right;
-      setCaret(pad, left.length + out.length);
-      return;
-    }
 
 // ------ GRAVE-N: '`' + n/N → ñ/Ñ (consume only ONE backtick; keep earlier backticks)
 if ((k==='n' || k==='N') && countTrailing(pad, '`') >= 1) {
@@ -612,7 +617,7 @@ window.addEventListener('load', function(){
 <section id="reviews" style="background:#f3f1e7; padding:64px 0; font-family:var(--ui-font);">
   <h2 style="text-align:center; font-size:42px; margin:0 0 12px; color:#000;">Leave a Review</h2>
   <p style="text-align:center; margin:0 0 28px; line-height:1.6; color:#333;">
-    UniQwerty - Parallel Layout
+    UniQwerty - Parallel Accents
   </p>
 
   <!-- form -->
