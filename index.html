@@ -167,6 +167,7 @@
         <img class="keyIcon" src="img/comma.png" alt="comma trigger key">
         <h3 class="hd">How to use this key</h3>
         <p class="sub">,+aeiouy → áéíóúý <small></small><br>
+		,+cnszrlwgkmp → ćńśźŕĺẃǵḱḿṕ <small></small><br>
         Otherwise, it stays as comma.</p>
         <div class="rule">
           <svg class="check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#10b981" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
@@ -201,7 +202,7 @@
         <img class="keyIcon" src="img/semicolon.png" alt="semicolon trigger key">
         <h3 class="hd">How to use this key</h3>
         <p class="sub">;+aeiouy → âêîôûŷ <small></small><br>
-		;+c → ç <small></small><br>
+		;+cstgklnrdh → çşţģķļņŗḑḩ <small></small><br>
 		Otherwise, it stays as semicolon.</p>
         <div class="rule">
           <svg class="check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#10b981" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
@@ -400,10 +401,37 @@ closeBtn.addEventListener('click',closeModal);
   const pad = document.getElementById('pad');
 
   const vowels = 'aeiouyAEIOUY';
-  const mapAcute = {'a':'á','e':'é','i':'í','o':'ó','u':'ú','y':'ý','A':'Á','E':'É','I':'Í','O':'Ó','U':'Ú','Y':'Ý'};
+  const mapAcute = {
+  'a':'á','e':'é','i':'í','o':'ó','u':'ú','y':'ý',
+  'A':'Á','E':'É','I':'Í','O':'Ó','U':'Ú','Y':'Ý',
+  // extended to consonants
+  'c':'ć','C':'Ć',
+  'n':'ń','N':'Ń',
+  's':'ś','S':'Ś',
+  'z':'ź','Z':'Ź',
+  'r':'ŕ','R':'Ŕ',
+  'l':'ĺ','L':'Ĺ',
+  'w':'ẃ','W':'Ẃ',
+  'g':'ǵ','G':'Ǵ',
+  'k':'ḱ','K':'Ḱ',
+  'm':'ḿ','M':'Ḿ',
+  'p':'ṕ','P':'Ṕ'
+};
   const mapGrave = {'a':'à','e':'è','i':'ì','o':'ò','u':'ù','A':'À','E':'È','I':'Ì','O':'Ò','U':'Ù'};
   const mapCirc  = {'a':'â','e':'ê','i':'î','o':'ô','u':'û','y':'ŷ','A':'Â','E':'Ê','I':'Î','O':'Ô','U':'Û','Y':'Ŷ'};
   const mapTrema = {'a':'ä','e':'ë','i':'ï','o':'ö','u':'ü','y':'ÿ','A':'Ä','E':'Ë','I':'Ï','O':'Ö','U':'Ü','Y':'Ÿ'};
+  const mapCedilla = {
+    'c':'ç','C':'Ç',
+    's':'ş','S':'Ş',
+    't':'ţ','T':'Ţ',
+    'g':'ģ','G':'Ģ',
+    'k':'ķ','K':'Ķ',
+    'l':'ļ','L':'Ļ',
+    'n':'ņ','N':'Ņ',
+    'r':'ŗ','R':'Ŗ',
+    'd':'ḑ','D':'Ḑ',
+    'h':'ḩ','H':'Ḩ'
+  };
 
   // ---- caret utils
   const sel = el => ({start: el.selectionStart, end: el.selectionEnd, val: el.value});
@@ -493,20 +521,6 @@ if ((k === 'o' || k === 'O' || k === 'a' || k === 'A') && hasTrailingOne(pad, 'q
   return;
 }
 
-// ------ CEDILLA: ';' + c/C → ç/Ç (consume only ONE semicolon; keep earlier semicolons)
-if ((k==='c'||k==='C') && countTrailing(pad, ';') >= 1) {
-  ev.preventDefault(); snapshot();
-  const cnt = countTrailing(pad, ';');
-  const keep = Math.max(0, cnt-1);
-  const {start, val} = sel(pad);
-  const left = val.slice(0, start - cnt) + ';'.repeat(keep);
-  const right = val.slice(start);
-  const out = (k==='C') ? 'Ç' : 'ç';
-  lastTransform = { trigger: ';', target: k, posAfterTrigger: (start - cnt) + keep + 1 };
-  pad.value = left + out + right;
-  setCaret(pad, left.length + out.length);
-  return;
-}
 
 
 // ------ GRAVE-N: '`' + n/N → ñ/Ñ (consume only ONE backtick; keep earlier backticks)
@@ -549,8 +563,8 @@ if ((k==='n' || k==='N') && countTrailing(pad, '`') >= 1) {
       return;
     }
 
-    // ------ ACUTE: ',' + vowel → acute; if ',,' + vowel, keep first comma → ',é'
-    if (vowels.includes(k) && countTrailing(pad, ',') >= 1) {
+    // ------ ACUTE: ',' + letter in mapAcute → acute; if ',,' + letter, keep first comma
+    if (countTrailing(pad, ',') >= 1 && mapAcute[k]) {
       ev.preventDefault(); snapshot();
       const cnt = countTrailing(pad, ',');           // 1 or more
       const keep = Math.max(0, cnt-1);               // keep (cnt-1) commas
@@ -558,16 +572,11 @@ if ((k==='n' || k==='N') && countTrailing(pad, '`') >= 1) {
       const left = val.slice(0, start - cnt) + ','.repeat(keep);
       const right = val.slice(start);
       const out = mapAcute[k] || k;
-	  
-	    // ---- [추가된 부분 시작] ----
-  // 직전 변환 메타 저장
-  lastTransform = {
-    trigger: ',',
-    target: k,
-    posAfterTrigger: (start - cnt) + keep + 1 // 트리거 바로 뒤 커서 예상 위치
-  };
-  // ---- [추가된 부분 끝] ----
-	  
+      lastTransform = {
+        trigger: ',',
+        target: k,
+        posAfterTrigger: (start - cnt) + keep + 1
+      };
       pad.value = left + out + right;
       setCaret(pad, left.length + out.length);
       return;
@@ -585,6 +594,22 @@ if ((k==='n' || k==='N') && countTrailing(pad, '`') >= 1) {
 	  
 	  lastTransform = { trigger: ';', target: k, posAfterTrigger: (start - cnt) + keep + 1 };
 	  
+      pad.value = left + out + right;
+      setCaret(pad, left.length + out.length);
+      return;
+    }
+
+    // ------ CEDILLA (extended): ';' + letter in mapCedilla → cedilla
+    // Priority note: vowels keep circumflex (handled above). Cedilla applies to non-vowel letters with mappings.
+    if (countTrailing(pad, ';') >= 1 && !vowels.includes(k) && mapCedilla[k]) {
+      ev.preventDefault(); snapshot();
+      const cnt = countTrailing(pad, ';');
+      const keep = Math.max(0, cnt-1);
+      const {start, val} = sel(pad);
+      const left = val.slice(0, start - cnt) + ';'.repeat(keep);
+      const right = val.slice(start);
+      const out = mapCedilla[k];
+      lastTransform = { trigger: ';', target: k, posAfterTrigger: (start - cnt) + keep + 1 };
       pad.value = left + out + right;
       setCaret(pad, left.length + out.length);
       return;
