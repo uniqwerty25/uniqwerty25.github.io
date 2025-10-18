@@ -618,6 +618,21 @@ if (countTrailing(pad, ';') >= 2 && mapCaron[k]) {
   return;
 }
 
+// before: if (hasTrailingOne(pad, 'q') && (k==='a'||k==='A'||k==='o'||k==='O'))
+if (countTrailing(pad, 'q') === 1 && (k==='a'||k==='A'||k==='o'||k==='O')) {
+  ev.preventDefault(); snapshot();
+  const { start } = sel(pad);
+  let out = k;
+  if (k === 'a') out = 'æ';
+  else if (k === 'A') out = 'Æ';
+  else if (k === 'o') out = 'œ';
+  else if (k === 'O') out = 'Œ';
+
+  lastTransform = { trigger: 'q', target: k, posAfterTrigger: (start - 1) + 1 };
+  replaceRange(pad, start - 1, start, out);
+  return;
+}
+
 // ------ DOT ABOVE: 'qq' + letter → dot-above (consume TWO q's)
 if (countTrailing(pad, 'q') >= 2 && mapDotAbove[k]) {
   ev.preventDefault(); snapshot();
