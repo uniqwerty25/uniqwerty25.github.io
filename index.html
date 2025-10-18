@@ -618,14 +618,19 @@ if (countTrailing(pad, ';') >= 2 && mapCaron[k]) {
   return;
 }
 
-// ------ DOT ABOVE: 'q' + letter → dot-above
-if (hasTrailingOne(pad, 'q') && mapDotAbove[k]) {
+// ------ DOT ABOVE: 'qq' + letter → dot-above (consume TWO q's)
+if (countTrailing(pad, 'q') >= 2 && mapDotAbove[k]) {
   ev.preventDefault(); snapshot();
-  const { start } = sel(pad);
-  const out = mapDotAbove[k];
+  const cnt = countTrailing(pad, 'q');       // 2,3,...
+  const keep = Math.max(0, cnt - 2);
+  const { start, val } = sel(pad);
+  const left  = val.slice(0, start - cnt) + 'q'.repeat(keep);
+  const right = val.slice(start);
+  const out   = mapDotAbove[k];
 
-  lastTransform = { trigger: 'q', target: k, posAfterTrigger: (start - 1) + 1 };
-  replaceRange(pad, start - 1, start, out);
+  lastTransform = { trigger: 'qq', target: k, posAfterTrigger: (start - cnt) + keep + 2 };
+  pad.value = left + out + right;
+  setCaret(pad, left.length + out.length);
   return;
 }
 
