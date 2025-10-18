@@ -241,6 +241,7 @@ It’s a good habit to leave a space after it.)
         <img class="keyIcon" src="img/q.png" alt="q ligature key">
         <h3 class="hd">How to use this key</h3>
         <p class="sub">q+a/o → æ/œ<br><small></small>
+		q+s → ß <small></small><br>
 		qq+abcdefghmnoprstwxyz → ȧḃċḋėḟġḣṁṅȯṗṙṡṫẇẋẏż <small></small><br>
 		Otherwise, it stays as just q</p>
         <div class="rule">
@@ -619,7 +620,7 @@ if (countTrailing(pad, ';') >= 2 && mapCaron[k]) {
 }
 
 // before: if (hasTrailingOne(pad, 'q') && (k==='a'||k==='A'||k==='o'||k==='O'))
-if (countTrailing(pad, 'q') === 1 && (k==='a'||k==='A'||k==='o'||k==='O')) {
+if (countTrailing(pad, 'q') === 1 && (k==='a'||k==='A'||k==='o'||k==='O'||k==='s'||k==='S')) {
   ev.preventDefault(); snapshot();
   const { start } = sel(pad);
   let out = k;
@@ -627,6 +628,8 @@ if (countTrailing(pad, 'q') === 1 && (k==='a'||k==='A'||k==='o'||k==='O')) {
   else if (k === 'A') out = 'Æ';
   else if (k === 'o') out = 'œ';
   else if (k === 'O') out = 'Œ';
+  else if (k === 's') out = 'ß';
+  else if (k === 'S') out = 'ẞ';
 
   lastTransform = { trigger: 'q', target: k, posAfterTrigger: (start - 1) + 1 };
   replaceRange(pad, start - 1, start, out);
