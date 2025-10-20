@@ -69,14 +69,56 @@
   .padWrap{background:#1a2230;border:none;min-height:520px;padding:0;border-radius:6px}
   #pad{width:100%;min-height:520px;border:none;background:#1a2230;color:#fff;outline:none;padding:22px;margin:0;resize:none;font:28px/1.6 ui-monospace,Menlo,Consolas,monospace;border-radius:6px}
   .note img{width:100%;height:auto;display:block;max-width:220px}
-.note{position:relative;max-width:220px;margin-top: -30px;}
-.noteText{
-  position:absolute; left:12%; top:45%; width:76%;
-  font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Arial;
-  font-size:16px;line-height:1.35;font-weight:700;color:#111;text-align:left;
-  text-shadow:0 1px 0 rgba(255,255,255,.4);
-  pointer-events:none;
+/* 래퍼: 노트와 버튼의 기준 폭 */
+.noteWrap{
+  position:relative;
+  width:340px;              /* 필요하면 조정 */
+  display:inline-block;
 }
+
+/* 노트 */
+.note{position:relative;max-width:220px;margin-top: -30px;}
+.note>img{ width:100%; display:block; }
+
+/* 노트 내부 텍스트 박스 */
+.noteText{
+  position:absolute;
+  left:28px;
+  right:28px;
+  bottom:36px;
+  display:flex;
+  flex-direction:column;
+  z-index:2;
+  color:#111;
+}
+.noteText h4{
+  margin:0 0 12px 0;
+  font-size:22px;
+  font-weight:800;
+}
+.noteText p{
+  margin:0;
+  line-height:1.5;
+  font-weight:600;
+  overflow-wrap:break-word; /* 줄바꿈 강제 */
+  word-break:keep-all;      /* 단어 단위 유지 */
+  hyphens:auto;             /* 하이픈 분할 허용(지원 브라우저) */
+}
+
+/* 밖으로 뺀 빨간 버튼: 노트 왼쪽 정렬 */
+.beta-btn-out{
+  display:inline-block;
+  background:#ff2b2b;
+  color:#fff;
+  font-weight:800;
+  border-radius:14px;
+  text-decoration:none;
+  transition:background .2s;
+}
+.beta-btn-out:hover{ background:#ff4646; }
+
+
+
 @media (max-width: 768px) {
   .hero .enter {
     padding: 12px 22px;
@@ -170,7 +212,7 @@
         <h1 class="title1">UniQwerty / Parallel Accents</h1>
         <div class="bullets">
           <div>&nbsp;&nbsp;</div>
-		  <div>•&nbsp;&nbsp;No Dead Keys. No Shift. No AltGr. No Long Press.</div>
+		  <div>•&nbsp;&nbsp;<span style="font-weight:600;">No Dead Keys. No Shift. No AltGr. No Long Press.</span></div>
           <div>•&nbsp;&nbsp;Almost All One-touch Accents.</div>
           <div>•&nbsp;&nbsp;Supports almost all Latin-based languages — except a few using ring, breve, ogonek, macron, or double acute, which will be supported soon.</div>
         </div>
@@ -321,7 +363,7 @@ When this option is enabled, you can type the plain grave symbol instead of the 
   </div>
 </div>
 
-<!-- DEMO -->
+<!-- DEMO (전체 교체본) -->
 <section id="demo">
   <div class="demoWrap">
     <div class="demoTop">
@@ -330,25 +372,39 @@ When this option is enabled, you can type the plain grave symbol instead of the 
         <img src="img/comma.png" alt="comma">
         <img src="img/dot.png" alt="dot">
         <img src="img/semicolon.png" alt="semicolon">
-		<img src="img/grave.png" alt="grave">
-		<img src="img/q.png" alt="q">
+        <img src="img/grave.png" alt="grave">
+        <img src="img/q.png" alt="q">
       </div>
     </div>
+
     <div class="surface">
       <div class="padWrap">
         <textarea id="pad" placeholder="Type here..." spellcheck="false"></textarea>
       </div>
-      <div class="note">
-  <img src="img/note.png" alt="note area">
-  <div class="noteText">
-  <p style="font-size:20px; font-weight:600; margin:0 0 18px;">
-    The UniQwerty Beta Program is launching soon!
-  </p>
-  <p style="font-size:16px; line-height:1.4; font-weight:500; margin:0;">
-    Now you can turn your QWERTY into UniQwerty.
-  </p>
-</div>
-</div>
+
+      <!-- 노트 전체 수정본 -->
+      <div class="noteWrap" style="position:relative;width:340px;display:inline-block;">
+        <div class="note" style="position:relative;width:100%;">
+          <img src="img/note.png" alt="note area" style="width:100%;display:block;">
+          <div class="noteText"
+               style="position:absolute;left:28px;right:28px;top:180px;bottom:36px;
+                      display:flex;flex-direction:column;z-index:2;color:#111;overflow:hidden;">
+            <h4 style="margin:0 0 12px 0;font-size:22px;font-weight:800;">Note</h4>
+            <p style="margin:0;line-height:1.5;font-weight:500;
+                      overflow-wrap:break-word;word-break:keep-all;hyphens:auto;">
+              Ring, breve, ogonek, <br>macron, and double <br>acute will be <br>supported soon.
+            </p>
+          </div>
+        </div>
+
+        <!-- 버튼: 노트 아래 왼쪽 정렬 -->
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScqsNqj2P9wZDWAdnnycCplCj-sZ9zRlyYrfZRIZsBVv6l-Sg/viewform?usp=header" target="_blank"
+           style="display:inline-block;margin:5px 0 0 3px;padding:14px 16px;
+                  background:#ff2b2b;color:#fff;font-weight:800;border-radius:16px;
+                  text-decoration:none;transition:background .2s;">
+          Join the beta program
+        </a>
+      </div>
     </div>
   </div>
 </section>
