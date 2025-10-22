@@ -1561,6 +1561,35 @@ if (typeof ch === 'object') {
   });
 })();
 </script>
+<script>
+(function(){
+  const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) || window.innerWidth < 900;
+  const demo = document.getElementById('demo');
+  if (!isMobile || !demo) return;
+
+  // 데모 숨기기
+  demo.style.display = 'none';
+
+  // 안내 문구 삽입
+  const notice = document.createElement('div');
+  notice.textContent = "Pour essayer SuperQwerty, veuillez visiter sur PC.";
+  Object.assign(notice.style, {
+    background:'#111',
+    color:'#9fe0ff',
+    fontSize:'18px',
+    textAlign:'center',
+    padding:'48px 24px',
+    fontWeight:'700',
+    lineHeight:'1.6'
+  });
+  demo.parentNode.insertBefore(notice, demo);
+  window.scrollTo({ top: notice.offsetTop, behavior:'smooth' });
+
+  // 버튼 텍스트도 수정
+  const btn = document.getElementById('heroBtn');
+  if (btn) btn.textContent = "Faites défiler pour en savoir plus";
+})();
+</script>
 
 
 </body>
