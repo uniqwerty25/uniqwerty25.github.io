@@ -13,7 +13,7 @@
   .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   .hero .enter{position:absolute;right:5vw;bottom:8vh;background:var(--btn);color:#fff;font-weight:700;border:none;border-radius:999px;padding:16px 28px;font-size:22px;cursor:pointer}
     .hero-copy {
-    position: absolute; right: 7vw; top: 35vh;
+    position: absolute; right: 7vw; top: 12vh;
     color: #fff; text-align: left; z-index: 2;
     pointer-events: none; /* 아래 버튼 클릭 막지 않게 */
     text-shadow: 0 2px 10px rgba(0,0,0,.35);
@@ -54,72 +54,17 @@
   .dot{width:7px;height:7px;border-radius:50%;background:#ddd}
   .dot.on{background:#111}
   .tryBig{display:inline-block;background:var(--btn);color:#fff;border:none;border-radius:999px;padding:16px 34px;font-size:22px;font-weight:800;box-shadow:0 10px 36px rgba(255,59,48,.28);cursor:pointer;position:absolute;right:36px;bottom:36px}
-  /* DEMO minimal */
-  #demo{display:none;background:#000;color:#fff;padding:28px 18px 64px}
-  .demoWrap{max-width:1120px;margin:0 auto;position:relative}
-  .demoTop{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-  .brand{font-size:36px;font-weight:900;letter-spacing:0.2px}
-  .brand small{font-size:22px;font-weight:400;color:#d0d0d0;margin-left:10px}
-  .topKeys{display:flex;gap:14px}
-  .topKeys img{width:64px;height:64px;object-fit:contain;filter:drop-shadow(0 3px 4px rgba(0,0,0,.35))}
-  .topKeys {
-  transform: translateX(-180px); /* 왼쪽으로 이동 */
+  
+.mobileNotice{
+  display:none;
+  position:sticky; top:0; z-index:5;
+  background:#111; color:#ffd54f;
+  padding:10px 14px; text-align:center;
+  font:600 14px/1.4 var(--ui-font);
+  border-bottom:1px solid rgba(255,213,79,.25);
 }
-  .surface{display:grid;grid-template-columns:1.25fr 220px;gap:24px;align-items:start}
-  .padWrap{background:#1a2230;border:none;min-height:520px;padding:0;border-radius:6px}
-  #pad{width:100%;min-height:520px;border:none;background:#1a2230;color:#fff;outline:none;padding:22px;margin:0;resize:none;font:28px/1.6 ui-monospace,Menlo,Consolas,monospace;border-radius:6px}
-  .note img{width:100%;height:auto;display:block;max-width:220px}
-/* 래퍼: 노트와 버튼의 기준 폭 */
-.noteWrap{
-  position:relative;
-  width:340px;              /* 필요하면 조정 */
-  display:inline-block;
-}
-
-/* 노트 */
-.note{position:relative;max-width:220px;margin-top: -30px;}
-.note>img{ width:100%; display:block; }
-
-/* 노트 내부 텍스트 박스 */
-.noteText{
-  position:absolute;
-  left:28px;
-  right:28px;
-  bottom:36px;
-  display:flex;
-  flex-direction:column;
-  z-index:2;
-  color:#111;
-}
-.noteText h4{
-  margin:0 0 12px 0;
-  font-size:22px;
-  font-weight:800;
-}
-.noteText p{
-  margin:0;
-  line-height:1.5;
-  font-weight:600;
-  overflow-wrap:break-word; /* 줄바꿈 강제 */
-  word-break:keep-all;      /* 단어 단위 유지 */
-  hyphens:auto;             /* 하이픈 분할 허용(지원 브라우저) */
-}
-
-/* 밖으로 뺀 빨간 버튼: 노트 왼쪽 정렬 */
-.beta-btn-out{
-  display:inline-block;
-  background:#ff2b2b;
-  color:#fff;
-  font-weight:800;
-  border-radius:14px;
-  text-decoration:none;
-  transition:background .2s;
-}
-.beta-btn-out:hover{ background:#ff4646; }
-
-
-
 @media (max-width: 768px) {
+  .mobileNotice{ display:block; }
   .hero .enter {
     padding: 12px 22px;
     font-size: 16px;
@@ -150,52 +95,17 @@
   .ruleText {
     font-size: 16px;
   }
-  .tryBig {
-    position: static;
-    display: block;
-    margin: 32px auto 0;
-    width: 100%;
-    font-size: 18px;
-    padding: 14px 0;
-  }
-  .demoTop {
-    flex-direction: column;
-    gap: 10px;
-  }
-  .brand {
-    font-size: 26px;
-  }
-  .topKeys img {
-    width: 48px;
-    height: 48px;
-  }
-  .surface {
-    grid-template-columns: 1fr;
-  }
-  .note {
-    margin-top: 24px;
-    max-width: 100%;
-    text-align: center;
-  }
-  #pad {
-    font-size: 20px;
-    min-height: 320px;
-  }
   #reviews h2 {
     font-size: 30px;
   }
-  #reviews form {
-    grid-template-columns: 1fr;
-  }
+#reviews form{ grid-template-columns:1fr !important; }
+#reviews form > *{ grid-column:1 / -1 !important; }
+#reviews #rvStars{ justify-content:center !important; }
+#reviews textarea{ min-height:160px; }
 }
 
 </style>
 <style>:root{--ui-font:"Noto Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif}</style>
-<script>
-if (window.matchMedia('(max-width: 768px)').matches) {
-  location.href = 'mobile.html';
-}
-</script>
 
 </head>
 <body>
@@ -207,6 +117,8 @@ if (window.matchMedia('(max-width: 768px)').matches) {
 </div>
   <button class="enter" id="heroBtn">En savoir plus</button>
 </section>
+<div class="mobileNotice">⚠️ Veuillez utiliser un ordinateur pour la démonstration.</div>
+
 
 <!-- Tutorial (all 6 slides, Try only on last) -->
 <div class="modal" id="modal">
@@ -334,7 +246,6 @@ Si la transformation n’est pas souhaitée, appuyez simplement une fois sur Ret
           </div>
         </div>
         <div class="counter">7/7</div>
-		<button class="tryBig" id="tryBig">Essayez maintenant</button>
       </div>
     </div>	
 	
@@ -351,52 +262,6 @@ Si la transformation n’est pas souhaitée, appuyez simplement une fois sur Ret
   </div>
 </div>
 
-<!-- DEMO (전체 교체본) -->
-<section id="demo">
-  <div class="demoWrap">
-    <div class="demoTop">
-      <div class="brand">SuperQwerty<small> Sentez les accents parallèles</small></div>
-      <div class="topKeys">        
-        <img src="img/comma.png" alt="comma">
-        <img src="img/dot.png" alt="dot">
-        <img src="img/semicolon.png" alt="semicolon">
-        <img src="img/question.png" alt="grave">
-        <img src="img/q.png" alt="q">
-      </div>
-    </div>
-
-    <div class="surface">
-      <div class="padWrap">
-        <textarea id="pad" placeholder="Tapez ici..." spellcheck="false"></textarea>
-      </div>
-
-      <!-- 노트 전체 수정본 -->
-      <div class="noteWrap" style="position:relative;width:340px;display:inline-block;">
-        <div class="note" style="position:relative;width:100%;">
-          <img src="img/note.png" alt="note area" style="width:100%;display:block;">
-          <div class="noteText"
-               style="position:absolute;left:28px;right:28px;top:180px;bottom:36px;
-                      display:flex;flex-direction:column;z-index:2;color:#111;overflow:hidden;">
-            <h4 style="margin:0 0 12px 0;font-size:22px;font-weight:800;">Remarque</h4>
-            <p style="margin:0;line-height:1.5;font-weight:500;
-                      overflow-wrap:break-word;word-break:keep-all;hyphens:auto;">
-              N’oubliez pas de vous inscrire au programme bêta gratuit !
-            </p>
-          </div>
-        </div>
-
-        <!-- 버튼: 노트 아래 왼쪽 정렬 -->
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLScqsNqj2P9wZDWAdnnycCplCj-sZ9zRlyYrfZRIZsBVv6l-Sg/viewform?usp=header" target="_blank"
-           style="display:inline-block;margin:5px 0 0 3px;padding:14px 20px;
-                  background:#ff2b2b;color:#fff;font-weight:800;border-radius:16px;
-                  text-decoration:none;font-size:20px;transition:background .2s;">
-          Rejoignez la bêta
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
 <script>
 // Modal & navigation
 const heroBtn=document.getElementById('heroBtn');
@@ -409,7 +274,12 @@ const dots=document.getElementById('dots');
 const tryBig=document.getElementById('tryBig');
 const demo=document.getElementById('demo');
 
-function openModal(){document.body.style.overflow='hidden';modal.classList.add('on');show(0);}
+function openModal(){
+  const isMobile = window.matchMedia('(pointer: coarse)').matches || /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+  if (!isMobile) document.body.style.overflow = 'hidden';  // 데스크톱만 잠금
+  modal.classList.add('on');
+  show(0);
+}
 function closeModal(){modal.classList.remove('on');document.body.style.overflow='';}
 function openDemo(){closeModal();demo.style.display='block';window.scrollTo({top:demo.offsetTop,behavior:'smooth'}); localStorage.setItem('uq_seen_tutorial', '1'); }
 
@@ -452,25 +322,23 @@ closeBtn.addEventListener('click',closeModal);
   const SEEN_KEY = 'uq_seen_tutorial';
   const seen = localStorage.getItem(SEEN_KEY) === '1';
   const btn = document.getElementById('heroBtn');
+  const isMobile = window.matchMedia('(pointer: coarse)').matches || /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
 
   window.UQ_IS_SEEN = seen;
 
-  // 버튼 라벨 고정
   btn.textContent = 'En savoir plus';
 
   if (seen) {
-    // 재방문: 페이지 로드 즉시 데모를 열어 둬서 스크롤 가능하게
     demo.style.display = 'block';
-    document.body.style.overflow = '';   // 혹시 잠겨있으면 해제
-    btn.onclick = () => {
-      window.scrollTo({ top: demo.offsetTop, behavior: 'smooth' });
-    };
+    document.body.style.overflow = '';   // 항상 스크롤 허용
+    btn.onclick = () => window.scrollTo({ top: demo.offsetTop, behavior: 'smooth' });
   } else {
-  // 첫 방문자: 스크롤 막기
-  document.body.style.overflow = 'hidden';
-  btn.onclick = openModal;
+    // 첫 방문자: 데스크톱만 스크롤 잠금, 모바일은 스크롤 허용
+    document.body.style.overflow = isMobile ? '' : 'hidden';
+    btn.onclick = openModal;
   }
 })();
+
 
 
 </script>
@@ -1092,480 +960,6 @@ html, body { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   .nav{ position:sticky; bottom:0; z-index:2; }
 }
 </style>
-
-
-
-<script>
-// ===== Gentle Snap: DEMO <-> REVIEWS (revisit only) =====
-(function(){
-  const SEEN = window.UQ_IS_SEEN === true || localStorage.getItem('uq_seen_tutorial') === '1';
-  const demo = document.getElementById('demo');
-  const reviews = document.getElementById('reviews');
-  if (!SEEN || !demo || !reviews) return;
-
-  window.addEventListener('load', () => {
-    let snapping = false;
-    let idleTO = null;
-    let lastInteractAt = 0;
-
-    const hero = document.querySelector('.hero');
-
-    function anchorPos(el){ return el ? el.offsetTop : 0; }
-    function heroBottom(){
-      return hero ? (hero.offsetTop + hero.offsetHeight) : 0;
-    }
-
-    function getAnchors(){
-      const demoTop = anchorPos(demo);
-      const revTop  = anchorPos(reviews);
-      return { demoTop, revTop };
-    }
-
-    // Only decide to snap when user STOPS interacting for a short moment.
-    function nudgeSnapSoon(delay=140){
-      if (snapping) return;
-      if (idleTO) clearTimeout(idleTO);
-      idleTO = setTimeout(checkAndSnap, delay);
-    }
-
-    // Heuristic: snap only if user is near an anchor (within 35% of viewport).
-    function checkAndSnap(){
-      const y  = window.scrollY || window.pageYOffset;
-      const vh = window.innerHeight || 0;
-      const { demoTop, revTop } = getAnchors();
-
-	// ✅ 리뷰 섹션부터는 스냅 비활성화 (여유 60px 버퍼)
-	if (y >= revTop - 60) return;
-
-      // If still actively interacting very recently, skip.
-      if (Date.now() - lastInteractAt < 80) return;
-
-      const near = (target)=> Math.abs(y - target) <= vh * 0.35;
-
-      const isNearDemo = near(demoTop);
-      const isNearRev  = near(revTop);
-
-      // If in between and not near either, do nothing.
-      if (!isNearDemo && !isNearRev) return;
-
-      // Choose nearest target.
-      const target = (Math.abs(y - demoTop) <= Math.abs(y - revTop)) ? demoTop : revTop;
-
-      // If already basically there, skip.
-      if (Math.abs(y - target) < 6) return;
-
-      doSnap(target);
-    }
-
-    function doSnap(targetY){
-      snapping = true;
-      window.scrollTo({ top: targetY, behavior: 'smooth' });
-      // Release after motion
-      const release = () => { snapping = false; window.removeEventListener('scroll', onDuringSnap); };
-      let checks = 0;
-      const onDuringSnap = () => {
-        const y = window.scrollY || window.pageYOffset;
-        if (Math.abs(y - targetY) < 2 || checks++ > 24) release();
-      };
-      window.addEventListener('scroll', onDuringSnap);
-      setTimeout(release, 600);
-    }
-
-    function markInteract(){
-      lastInteractAt = Date.now();
-    }
-
-    // Inputs we consider: wheel/touch/keys
-    window.addEventListener('wheel',   () => { markInteract(); nudgeSnapSoon(160); }, { passive:true });
-    window.addEventListener('touchmove', markInteract, { passive:true });
-    window.addEventListener('touchend',  () => { markInteract(); nudgeSnapSoon(140); }, { passive:true });
-
-    window.addEventListener('keydown', (e) => {
-      // Arrow/PageUp/PageDown/Space/Home/End typical scroll keys
-      const keys = ['ArrowDown','ArrowUp','PageDown','PageUp','Space','Home','End'];
-      if (keys.includes(e.code) || keys.includes(e.key)) {
-        markInteract();
-        nudgeSnapSoon(180);
-      }
-    }, { passive:true });
-
-    // Also run a gentle check after load if landing near anchors.
-    nudgeSnapSoon(280);
-  });
-})();
-</script>
-
-<!-- ==== Virtual QWERTY (demo only, Shift one-shot) ==== -->
-<style>
-  .vkbd{position:fixed;bottom:14px;left:0;
-    z-index:9999;background:rgba(18,22,30,.92);border:1px solid #20293a;border-radius:12px;
-    padding:8px 10px;font-family:ui-monospace,menlo,consolas,monospace}
-  .vkbd-row{display:flex;gap:6px;margin:4px 0;justify-content:center}
-  .vkbd-row.r2{margin-left:6px}.vkbd-row.r3{margin-left:12px}
-.vkbd-key{
-  min-width:32px;
-  padding:7px 9px;
-  border-radius:8px;
-  border:1px solid #2a354a;
-  background:#1f2634;
-  color:#e9eef7;
-  font-size:18px;        /* ↑ 더 크게 */
-  line-height:1;
-  cursor:pointer;
-
-  position:relative;     /* 배지 위치를 위해 */
-  display:flex;
-  align-items:center;
-  justify-content:flex-start; /* 좌정렬 */
-  font-weight:700;
-  padding-left:6px;      /* 좌측 여백 */
-}
-.vkbd-key .accent{
-  position:absolute;
-  top:2px;
-  right:4px;
-  font-size:12px;    /* ↑ 더 크게 */
-  font-weight:800;
-  color:#ff3b30;     /* 빨간색 */
-  pointer-events:none;
-}
-
-  .vkbd-key:active{background:#2a3347}
-  .vkbd-key.backspace{min-width:64px;font-weight:600}
-  .vkbd-key.space{min-width:220px}
-  .vkbd-key.shift{min-width:56px;font-weight:700}
-  .vkbd-key.shift.active{background:#2b3650;border-color:#3a4a6a}
-  @media(max-width:768px){
-    .vkbd{padding:6px 8px}
-    .vkbd-key{min-width:24px;padding:5px 6px;font-size:12px}
-    .vkbd-key.backspace{min-width:56px}
-    .vkbd-key.space{min-width:160px}
-    .vkbd-key.shift{min-width:50px}
-    .vkbd-row.r2{margin-left:4px}.vkbd-row.r3{margin-left:8px}
-  }
-  /* 악센트 배지 공통 + 위치 */
-.acc{
-  position:absolute;
-  color:#ff3b30;   /* 빨강 */
-  font-weight:800;
-  line-height:1;
-  pointer-events:none;
-}
-
-/* 위치별 (크게 보이도록 16px) */
-.acc.acc-tr{ top:3px;  right:2px;  font-size:16px; }
-.acc.acc-tl{ top:2px;  left:4px;   font-size:16px; }
-.acc.acc-br{
-  bottom:6px;        /* ← 원래 2px에서 올림 */
-  right:5px;
-  font-size:16px;
-  transform:translateY(-2px); /* 살짝 위로 띄우기 */
-}
-
-</style>
-
-<style>
-/* Tutorial(모달) 열리면 가상자판/안내문 숨김 */
-#modal.on ~ #vkbd-root, #modal.on ~ #azerty-hint { display:none !important; }
-</style>
-
-<p id="azerty-hint" hidden style="
-  text-align:center;color:#9aa3b8;font-family:ui-sans-serif,system-ui;
-  font-size:14px;margin:4px 0 2px;">
-  Utilisateurs d’AZERTY : essayez ici avec le clavier virtuel.
-</p>
-
-
-<div id="vkbd-root" hidden></div>
-<script>
-(function(){
-  const padHook = document.getElementById('pad');
-if (!padHook) return;
-  const root=document.getElementById('vkbd-root'); root.hidden=true; root.className='vkbd';
-  
-  // === AZERTY hint (follows virtual keyboard) ===
-const hint = document.createElement('div');
-hint.id = 'azerty-hint';
-hint.textContent = "Utilisateurs d’AZERTY : essayez ici avec le clavier virtuel.";
-Object.assign(hint.style, {
-  position:'fixed', zIndex:'10000', color:'#9aa3b8',
-  fontFamily:'ui-sans-serif,system-ui', fontSize:'14px',
-  pointerEvents:'none'
-});
-document.body.appendChild(hint);
-
-// === 키보드를 #pad 중앙에 정렬 ===
-function placeKbd(){
-  const pad = document.getElementById('pad');
-  if (!pad) return;
-  const r = pad.getBoundingClientRect();
-  const kbw = root.offsetWidth || 0;
-  // 패드 중앙 x 좌표에서 키보드 너비 절반을 빼서 left 계산
-  let x = r.left + r.width/2 - kbw/2;
-  // 좌우 살짝 여유(8px) 주고 화면 밖 방지
-  x = Math.max(8, Math.min((window.innerWidth - kbw - 8), x));
-  root.style.left = x + 'px';
-}
-
-placeKbd();
-addEventListener('resize', placeKbd);
-addEventListener('scroll', placeKbd, {passive:true});
-new ResizeObserver(() => placeKbd()).observe(document.getElementById('pad'));
-
-
-function placeHint(){
-  const r = root.getBoundingClientRect();
-  hint.style.left = (r.left + r.width/2) + 'px';
-  hint.style.transform = 'translateX(-50%)';
-  hint.style.bottom = (window.innerHeight - r.top - 4) + 'px'; // 자판 위 8px
-  hint.hidden = root.hidden; // 자판과 동시 표시/숨김
-}
-placeHint();
-addEventListener('resize', placeHint);
-addEventListener('scroll', placeHint, {passive:true});
-
-// === 데모 섹션 가시성으로 자판/힌트 토글 ===
-  const demo = document.getElementById('demo');
-  if (demo) {
-  function syncByDemoVisibility() {
-  const r = demo.getBoundingClientRect();
-  const vis = (r.top < window.innerHeight * 0.85) && (r.bottom > window.innerHeight * 0.15);
-  root.hidden = !vis;
-  placeKbd();
-  hint.hidden = !vis;
-  placeHint(); // 위치 재계산
-  }
-  // 스크롤/리사이즈/해시변경 시 재평가
-  window.addEventListener('scroll',  syncByDemoVisibility, {passive:true});
-  window.addEventListener('resize',  syncByDemoVisibility);
-  window.addEventListener('hashchange', syncByDemoVisibility);
-  // 최초 1회 평가
-  syncByDemoVisibility();
-  }
- 
-  // === 튜토리얼(모달) 열리면 강제 숨김 ===
-  const modal = document.getElementById('modal');
-  if (modal) {
-  const mo = new MutationObserver(() => {
-  if (modal.classList.contains('on')) {
-    root.hidden = true;
-    hint.hidden = true;
-   } else {
-  // 모달 닫히면 데모 가시성 기준으로 다시 평가
-     if (typeof syncByDemoVisibility === 'function') syncByDemoVisibility();
-      }
-    });
-   mo.observe(modal, { attributes:true, attributeFilter:['class'] });
-  }  
-  let shiftActive=false;
-
-const layout=[
-  [
-    { base:'q', accTR:'e' },   // 합자: e
-    { base:'w' },
-    { base:'e' },
-    { base:'r' },
-    { base:'t' },
-    { base:'y' },
-    { base:'u' },
-    { base:'i' },
-    { base:'o' },
-    { base:'p' },
-    '⌫'
-  ],
-  [
-    { base:'a' },
-    { base:'s' },
-    { base:'d' },
-    { base:'f' },
-    { base:'g' },
-    { base:'h' },
-    { base:'j' },
-    { base:'k' },
-    { base:'l' },
-    // 세미콜론: 위-오른쪽에 ˆ, 아래-오른쪽에 ¸(세디유)
-    { base:';', accTR:'ˆ', accBR:'¸' },
-    { base:'\'' }
-  ],
-  [
-    'Shift',
-    { base:'z' },
-    { base:'x' },
-    { base:'c' },
-    { base:'v' },
-    { base:'b' },
-    { base:'n' },
-    { base:'m' },
-    // 콤마: 애큐트
-    { base:',', accTR:'´' },
-    // 점: 트레마
-    { base:'.', accTR:'¨' },
-    // 물음표: 좌-위에 그레이브, 우-위에 틸드
-    { base:'?', accTL:'`', accTR:'~' }
-  ],
-  ['Space']
-];
-
-  function codeOf(ch){
-    if(ch===';')return'Semicolon';
-    if(ch===',')return'Comma';
-    if(ch=== '.')return'Period';
-    if(ch==='/'||ch==='?')return'Slash';
-    if(ch==='\'')return'Quote';
-    if(ch===' ')return'Space';
-    if(ch.length===1&&/[a-z]/.test(ch))return'Key'+ch.toUpperCase();
-    return'';
-  }
-
-  function emitKey(key, code, useShift){
-    const pad=document.getElementById('pad'); if(!pad)return;
-    pad.focus();
-
-    const cc=(key&&key.length===1)?key.charCodeAt(0):0;
-    const kd=new KeyboardEvent('keydown',{key,code,shiftKey:!!useShift,bubbles:true,cancelable:true,composed:true,keyCode:cc,which:cc,charCode:cc});
-    pad.dispatchEvent(kd);
-
-    if(!kd.defaultPrevented){
-      if(key==='Backspace'){
-        const s=pad.selectionStart??pad.value.length,e=pad.selectionEnd??pad.value.length,v=pad.value??'';
-        if(s===e&&s>0){pad.value=v.slice(0,s-1)+v.slice(e);pad.selectionStart=pad.selectionEnd=s-1;}
-        else{pad.value=v.slice(0,s)+v.slice(e);pad.selectionStart=pad.selectionEnd=s;}
-        pad.dispatchEvent(new Event('input',{bubbles:true}));
-      }else if(key===' '){
-        const s=pad.selectionStart??pad.value.length,e=pad.selectionEnd??pad.value.length,v=pad.value??'';
-        pad.value=v.slice(0,s)+' '+v.slice(e);
-        pad.selectionStart=pad.selectionEnd=s+1;
-        pad.dispatchEvent(new Event('input',{bubbles:true}));
-      }else if(key.length===1){
-        const s=pad.selectionStart??pad.value.length,e=pad.selectionEnd??pad.value.length,v=pad.value??'';
-        pad.value=v.slice(0,s)+key+v.slice(e);
-        pad.selectionStart=pad.selectionEnd=s+1;
-        pad.dispatchEvent(new Event('input',{bubbles:true}));
-      }
-    }
-
-    pad.dispatchEvent(new KeyboardEvent('keyup',{key,code,shiftKey:!!useShift,bubbles:true,cancelable:true,composed:true,keyCode:cc,which:cc}));
-  }
-
-function emitFromLabel(label){
-  if(label==='⌫'){emitKey('Backspace','Backspace',false);return;}
-  if(label==='Space'){emitKey(' ','Space',false);return;}
-  if(label==='Shift'){ // 한 번만 적용되는 시프트
-    shiftActive=true;
-    shiftBtn.classList.add('active');
-    setTimeout(()=>shiftBtn.classList.remove('active'),150);
-    return;
-  }
-
-  // 가상자판 ? 버튼 → 실제로는 슬래시 입력
-  let sendKey = label === '?' ? '/' : label;
-
-  let useShift = shiftActive || (label==='?');
-  let key = sendKey;
-  if(/^[a-z]$/.test(sendKey) && useShift) key = sendKey.toUpperCase();
-  const code = codeOf(sendKey);
-  emitKey(key, code, useShift);
-  shiftActive = false;
-  shiftBtn.classList.remove('active');
-}
-
-
-  let shiftBtn=null;
-layout.forEach((row,i)=>{
-  const r=document.createElement('div'); r.className='vkbd-row r'+(i+1);
-  row.forEach(ch=>{
-    const label = (typeof ch === 'object') ? ch.base : ch;
-
-    const b=document.createElement('button');
-    b.type='button';
-    let cls='vkbd-key';
-    if(label==='⌫')cls+=' backspace';
-    if(label==='Space')cls+=' space';
-    if(label==='Shift'){cls+=' shift'; shiftBtn=b;}
-    b.className=cls;
-
-    // 기본 글자
-    b.textContent = label;
-
-    // 악센트 배지(빨간 표시)
-
-if (typeof ch === 'object') {
-  const add = (cls, txt) => {
-    if (!txt) return;
-    const s = document.createElement('span');
-    s.className = 'acc ' + cls; // acc + 위치 클래스
-    s.textContent = txt;
-    b.appendChild(s);
-  };
-  add('acc-tr', ch.accTR ?? ch.accent); // 우상단
-  add('acc-tl', ch.accTL);              // 좌상단
-  add('acc-br', ch.accBR);              // 우하단
-}
-
-    b.addEventListener('mousedown',e=>e.preventDefault());
-    b.addEventListener('click',()=>emitFromLabel(label));
-    r.appendChild(b);
-  });
-  root.appendChild(r);
-});
-
-})();
-</script>
-<!-- ==== /Virtual QWERTY ==== -->
-<script>
-(function(){
-  const root = document.getElementById('vkbd-root');   // 가상자판 래퍼
-  const demo = document.getElementById('demo');        // 체험기 섹션
-  const pad  = document.getElementById('pad');         // 입력 패드
-  if (!root || !demo) return;
-
-  // 기본은 숨김
-  root.hidden = true;
-
-  // 데모 섹션이 화면에 들어왔을 때만 보이게
-  const io = new IntersectionObserver(([ent])=>{
-    if (!ent) return;
-    if (document.activeElement === pad) { root.hidden = false; return; } // pad 포커스면 항상 표시
-    root.hidden = !ent.isIntersecting;
-  },{
-    threshold: 0.25,
-    rootMargin: '-10% 0px -35% 0px' // 위·아래 여유
-  });
-  io.observe(demo);
-
-  // pad 포커스/블러 시 가시성 보정
-  pad?.addEventListener('focus', ()=>{ root.hidden = false; placeKbd(); });
-  pad?.addEventListener('blur',  ()=>{
-    const r = demo.getBoundingClientRect(), vh = innerHeight||0;
-    const on = (r.top < vh*0.75) && (r.bottom > vh*0.25);
-    root.hidden = !on;
-	placeKbd();
-  });
-})();
-</script>
-<script>
-// ? ↔ / 입력 스왑 (직접 주입 방식)
-(() => {
-  const pad = document.getElementById('pad');
-  if (!pad) return;
-
-  pad.addEventListener('keydown', (e) => {
-    if (e.ctrlKey || e.metaKey || e.altKey) return;
-    if (e.key !== '?' && e.key !== '/') return;
-
-    e.preventDefault();  // 원래 입력 막고
-    const swapped = (e.key === '?') ? '/' : '?';
-
-    // 커서 위치에 직접 삽입
-    const s = pad.selectionStart ?? pad.value.length;
-    const epos = pad.selectionEnd ?? pad.value.length;
-    const v = pad.value ?? '';
-    pad.value = v.slice(0, s) + swapped + v.slice(epos);
-    pad.selectionStart = pad.selectionEnd = s + 1;
-    pad.dispatchEvent(new Event('input', { bubbles: true }));
-  });
-})();
-</script>
 
 
 </body>
