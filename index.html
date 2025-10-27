@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>SuperQwerty</title>
+<title>SuperAzerty</title>
 <style>
   :root{--btn:#ff3b30; --ink:#111; --mut:#444; --line:#e9eaee}
   *{box-sizing:border-box}
@@ -20,7 +20,7 @@
   }
   .hero-copy h1 {
     margin: 0; line-height: 1;
-    font-size: clamp(36px, 8vw, 80px);
+    font-size: clamp(36px, 8vw, 100px);
   }
   .hero-copy p {
     margin: 30px 0 0; line-height: 1.25;
@@ -36,7 +36,10 @@
   .s1-wrap{position:relative;height:100%;padding:28px 36px}
   .title1{position:absolute;left:7%;top:8%;margin:0;font-size:34px;font-weight:800}
   .bullets{position:absolute;left:7%;top:16%;font-size:26px;line-height:1.6}
-  .keysRow{position:absolute;left:7%;bottom:16%;width:62%;max-width:700px}
+  .layout{position:absolute;left:10%;bottom:16%;width:90%;max-width:800px}
+  .keysRow{position:absolute;left:30%;bottom:10%;width:15%;max-width:300px}
+  .symbols{position:absolute;left:20%;bottom:10%;width:50%;max-width:700px}
+  .emoji{position:absolute;left:20%;bottom:10%;width:50%;max-width:700px}
   .stepno{position:absolute;left:7%;bottom:7%;color:#666;font-size:16px}
   .frame{height:100%;padding:28px 36px;display:grid;grid-template-columns:220px 1fr;grid-template-rows:auto auto 1fr;gap:8px 24px;position:relative}
   .keyIcon{grid-column:1;grid-row:1 / span 2;align-self:start;justify-self:start;width:170px;height:auto}
@@ -66,9 +69,34 @@
   transform: translateX(-180px); /* 왼쪽으로 이동 */
 }
   .surface{display:grid;grid-template-columns:1.25fr 220px;gap:24px;align-items:start}
-  .padWrap{background:#1a2230;border:none;min-height:520px;padding:0;border-radius:6px}
-  #pad{width:100%;min-height:520px;border:none;background:#1a2230;color:#fff;outline:none;padding:22px;margin:0;resize:none;font:28px/1.6 ui-monospace,Menlo,Consolas,monospace;border-radius:6px}
+  .padWrap{background:#1a2230;border:none;min-height:300px;padding:0;border-radius:6px;position:relative;}
+  #pad{width:100%;min-height:300px;border:none;background:#1a2230;color:#fff;outline:none;padding:22px;margin:0;resize:none;font:28px/1.6 ui-monospace,Menlo,Consolas,monospace;border-radius:6px}
   .note img{width:100%;height:auto;display:block;max-width:220px}
+#emojiPanel{
+  position:absolute; z-index:10;
+  background:#fff; color:#000;
+  border:1px solid #fff; border-radius:10px;
+  padding:10px;
+  box-shadow:0 8px 26px rgba(0,0,0,.2);
+  overflow:hidden;         /* ✅ 스크롤바 제거 */
+  max-width:560px;
+}
+#emojiGrid{
+  display:grid;
+  grid-template-columns:repeat(8, 44px); /* 셀을 약간 넓혀줌 */
+  gap:6px;                               /* 셀 간격 확보 */
+  justify-items:center;
+  align-items:center;
+}
+#emojiPanel, #emojiPanel *{
+  font-family:"Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji",sans-serif;
+}
+#emojiPanel button{
+  border:0; background:none; width:25px; height:25px;
+  font-size:22px; line-height:1; cursor:pointer;
+}
+
+
 /* 래퍼: 노트와 버튼의 기준 폭 */
 .noteWrap{
   position:relative;
@@ -202,8 +230,8 @@ if (window.matchMedia('(max-width: 768px)').matches) {
 <section class="hero">
   <img src="img/thinkdifferent2.png" alt="background">
 <div class="hero-copy">
-  <h1>SuperQwerty</h1>
-  <p>La révolution<br>de la saisie des accents.</p>
+  <h1>SuperAzerty</h1>
+  <p>L’accomplissement d’AZERTY</p>
 </div>
   <button class="enter" id="heroBtn">En savoir plus</button>
 </section>
@@ -214,16 +242,13 @@ if (window.matchMedia('(max-width: 768px)').matches) {
 
     <div class="slide on" data-step="0">
       <div class="s1-wrap">
-        <h1 class="title1">SuperQwerty / Accents parallèles</h1>
+        <h1 class="title1">Votre AZERTY renaît en SuperAZERTY.</h1>
         <div class="bullets">
-          <div>&nbsp;&nbsp;</div>
-		  <div>•&nbsp;&nbsp;<span style="font-weight:600;">Aucune touche morte. Aucun Shift. Aucun AltGr. Aucune pression longue.</span></div>
-
-<div>•&nbsp;&nbsp;Tous les accents en un seul toucher.</div>
-          <div>•&nbsp;&nbsp;Les touches d’accent les plus proches</div>
+		  <div>•&nbsp;&nbsp;Accents en un seul toucher, chiffres en un seul toucher.</div>
+          <div>•&nbsp;&nbsp;Symboles sans utiliser AltGr.</div>
         </div>
-        <img class="keysRow" src="img/5keys.png" alt="five triggers">
-        <div class="stepno">1/7</div>
+        <img class="layout" src="img/layout.png" alt="five triggers">
+        <div class="stepno">1/10</div>
       </div>
     </div>
 
@@ -237,11 +262,11 @@ if (window.matchMedia('(max-width: 768px)').matches) {
         <div class="rule">
           <svg class="check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#10b981" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
           <div class="ruleText">
-            On met toujours une espace après une virgule dans l’écriture normale.<br>
-Par conséquent, il n’y a absolument aucun risque de conflit lorsque vous tapez une voyelle juste après.
+SuperAZERTY reconnaît ces lettres comme des accents lorsqu’elles suivent une virgule.<br>
+Cependant, comme on met toujours un espace après la virgule en tant que signe de ponctuation, il n’y a jamais de conflit entre les deux cas.
           </div>
         </div>
-        <div class="counter">2/7</div>
+        <div class="counter">2/10</div>
       </div>
     </div>
 
@@ -255,10 +280,13 @@ Par conséquent, il n’y a absolument aucun risque de conflit lorsque vous tape
           <svg class="check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#10b981" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
           <div class="ruleText">
             Quand vous tapez une ellipse avec deux points, vous ajoutez toujours une espace ensuite.<br>
-Ainsi, ce schéma n’interfère jamais avec votre écriture normale.
+Ainsi, ce schéma n’interfère jamais avec votre écriture normale.<br><br>
+Le point et les deux-points ont échangé leur place dans SuperAZERTY.<br>
+La saisie du point devient ainsi plus pratique.
           </div>
+		  <img class="keysRow" src="img/dot_move.png" alt="five triggers">
         </div>
-        <div class="counter">3/7</div>
+        <div class="counter">3/10</div>
       </div>
     </div>
 
@@ -278,25 +306,25 @@ Par conséquent, il n’y a jamais de conflit avec la saisie d’un accent circo
 C’est une bonne habitude de laisser une espace après celui-ci.)
           </div>
         </div>
-        <div class="counter">4/7</div>
+        <div class="counter">4/10</div>
       </div>
     </div>
 
     <div class="slide" data-step="4">
       <div class="frame">
-        <img class="keyIcon" src="img/question.png" alt="Grave & Tilde keys">
+        <img class="keyIcon" src="img/exclaim.png" alt="Grave & Tilde keys">
         <h3 class="hd">Comment utiliser cette touche : <span style="color:red;">accent grave</span> / <span style="color:red;">accent tilde</span></h3>
-        <p class="sub"><span style="color:red;">?</span>+aeioun → àèìòùñ <small></small><br>
+        <p class="sub"><span style="color:red;">!</span>+aeioun → àèìòùñ <small></small><br>
 		Sinon, elle reste le symbole lui-même.</p>
         <div class="rule">
           <svg class="check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#10b981" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
           <div class="ruleText">
-            SuperQwerty a inversé l’ordre du caractère de base et du caractère majuscule sur la touche <br>[/ ?]. Désormais, le point d’interrogation devient plus facile à saisir.
-De plus, cette touche sert de déclencheur pour les accents grave et tilde.<br>
-(Les développeurs peuvent activer l’option développeur pour rétablir la touche [/ ?] telle qu’à l’origine, et saisir les accents grave et tilde depuis la touche [` ~].)
+            SuperAZERTY reconnaît ces lettres comme des accents lorsqu’elles suivent un point d’exclamation. <br>
+			Cependant, comme on met toujours un espace après le point d’exclamation en tant que signe de ponctuation, il n’y a jamais de conflit entre les deux cas.<br>
+			(Les développeurs peuvent activer l’option développeur pour éviter tout conflit pendant la programmation.)
           </div>
         </div>
-        <div class="counter">5/7</div>
+        <div class="counter">5/10</div>
       </div>
     </div>
 	
@@ -309,31 +337,82 @@ De plus, cette touche sert de déclencheur pour les accents grave et tilde.<br>
         <div class="rule">
           <svg class="check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#10b981" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
           <div class="ruleText">
-            On trouve toujours un u après q — SuperQwerty ne touche jamais à qu.<br>
+            On trouve toujours un u après q — SuperAzerty ne touche jamais à qu.<br>
 Ainsi, cette combinaison sert uniquement à la saisie des accents, en toute sécurité.<br>
 Si la transformation n’est pas souhaitée, appuyez simplement une fois sur Retour arrière pour l’annuler immédiatement.
           </div>
         </div>
-        <div class="counter">6/7</div>
+        <div class="counter">6/10</div>
       </div>
     </div>
-
+	
     <div class="slide" data-step="6">
+      <div class="frame">
+        <img class="keyIcon" src="img/2.png" alt="q ligature key">
+        <h3 class="hd">Des chiffres et des symboles plus pratiques</h3>
+        <p class="sub">Les chiffres aussi, sans Majuscule<br><small></small>
+		Ajout de symboles utiles comme « » – — •</p>
+        <div class="rule">
+          <svg class="check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#10b981" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
+          <div class="ruleText">
+            Désormais, tapez les chiffres sans Majuscule même sur votre AZERTY.
+          </div>
+        </div>
+        <div class="counter">7/10</div>
+      </div>
+	  <img class="layout" src="img/numkey.png" alt="five triggers">
+    </div>
+	
+    <div class="slide" data-step="7">
+      <div class="frame">
+        <img class="keyIcon" src="img/dev.png" alt="q ligature key">
+        <h3 class="hd">Caractères spéciaux mémorisables</h3>
+        <p class="sub">Appuyez sur la touche fléchée, puis sur la touche du symbole souhaité.<br><small></small>
+		Disposition selon l’initiale de chaque alias – facile à mémoriser</p>
+        <div class="rule">
+          <svg class="check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#10b981" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
+          <div class="ruleText">
+            Un double appui sur la touche fléchée affichera la carte des touches.<br>
+			Désormais, tapez les symboles spéciaux sans Alt Gr.
+          </div>
+        </div>
+        <div class="counter">8/10</div>
+      </div>
+	  <img class="symbols" src="img/symbols.png" alt="five triggers">
+    </div>
+	
+    <div class="slide" data-step="8">
+      <div class="frame">
+        <img class="keyIcon" src="img/emoji.png" alt="q ligature key">
+        <h3 class="hd">Touche emoji</h3>
+        <p class="sub">Appuyez sur la touche 😀 pour ouvrir le panneau d’emojis.<br><small></small></p>
+        <div class="rule">
+          <svg class="check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#10b981" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
+          <div class="ruleText">
+            Exprimez vos émotions plus profondément avec des emojis.
+          </div>
+        </div>
+        <div class="counter">9/10</div>
+      </div>
+	  <img class="emoji" src="img/emoji2.png" alt="five triggers">
+    </div>
+	
+	
+    <div class="slide" data-step="9">
       <div class="frame">
         <img class="keyIcon" src="img/tip.png" alt="semicolon trigger key">
         <h3 class="hd">Astuce pour les développeurs</h3>
-        <p class="sub">Q. SuperQwerty pose-t-il des problèmes pendant le codage ?<small></small><br>
+        <p class="sub">Q. SuperAzerty pose-t-il des problèmes pendant le codage ?<small></small><br>
 		A. Pas d’inquiétude.</p>
         <div class="rule">
           <svg class="check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#10b981" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
           <div class="ruleText">
             Laissez toujours une espace après les virgules et les points-virgules, comme vous le feriez normalement.<br>
             Les développeurs peuvent utiliser les options développeur (ci-dessous) pour éviter tout conflit avec les accents :<br>
-– Rétablir la touche [/ ?] dans son comportement d’origine.<br>
-– Lorsqu’ils ne souhaitent pas de transformation avec les accents grave ou tilde, taper un espace factice après le déclencheur pour échapper la conversion.
+– Avec l’option développeur, après avoir tapé un point d’exclamation, vous pouvez entrer une espace d’échappement pour empêcher son fonctionnement comme touche d’accent.
           </div>
         </div>
-        <div class="counter">7/7</div>
+        <div class="counter">10/10</div>
 		<button class="tryBig" id="tryBig">Essayez maintenant</button>
       </div>
     </div>	
@@ -355,19 +434,28 @@ Si la transformation n’est pas souhaitée, appuyez simplement une fois sur Ret
 <section id="demo">
   <div class="demoWrap">
     <div class="demoTop">
-      <div class="brand">SuperQwerty<small> Sentez les accents parallèles</small></div>
-      <div class="topKeys">        
-        <img src="img/comma.png" alt="comma">
-        <img src="img/dot.png" alt="dot">
-        <img src="img/semicolon.png" alt="semicolon">
-        <img src="img/question.png" alt="grave">
-        <img src="img/q.png" alt="q">
-      </div>
+      <div class="brand">SuperAzerty<small> Votre AZERTY est désormais SuperAZERTY.</small></div>
     </div>
 
     <div class="surface">
       <div class="padWrap">
         <textarea id="pad" placeholder="Tapez ici..." spellcheck="false"></textarea>
+		<!-- Inline emoji panel for demo -->
+			<div id="emojiPanel" style="display:none; position:absolute; z-index:10;
+  background:#fff; color:#000; border:1px solid #fff; border-radius:12px;
+  padding:12px; box-shadow:0 8px 26px rgba(0,0,0,.20);
+  overflow:hidden; box-sizing:border-box; width:320px;">
+				<div id="emojiGrid" style="display:grid; grid-template-columns:repeat(8, 28px); gap:8px; font-size:22px; line-height:1; cursor:pointer;"></div>
+			</div>
+
+			<!-- demo 하단 레이아웃 이미지 -->
+		<div class="layoutBar" style="margin:-30px 0 0; text-align:center;">
+			<p style="text-align:center; color:#ccc; font-size:16px; margin:0 0 6px;">
+👉 Les touches fléchées ne sont pas des touches mortes sur le produit réel.
+</p>
+
+			<img src="img/layout.png" alt="layout" style="max-width:80%; height:auto; display:inline-block;">
+		</div>
       </div>
 
       <!-- 노트 전체 수정본 -->
@@ -386,7 +474,7 @@ Si la transformation n’est pas souhaitée, appuyez simplement une fois sur Ret
         </div>
 
         <!-- 버튼: 노트 아래 왼쪽 정렬 -->
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLScqsNqj2P9wZDWAdnnycCplCj-sZ9zRlyYrfZRIZsBVv6l-Sg/viewform?usp=header" target="_blank"
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSekvmqVIroU5Rv_BlXE0HNMWPcdfmNCeMReaZfrMdrTaGHcgg/viewform?usp=publish-editor" target="_blank"
            style="display:inline-block;margin:5px 0 0 3px;padding:14px 20px;
                   background:#ff2b2b;color:#fff;font-weight:800;border-radius:16px;
                   text-decoration:none;font-size:20px;transition:background .2s;">
@@ -394,6 +482,7 @@ Si la transformation n’est pas souhaitée, appuyez simplement une fois sur Ret
         </a>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -459,14 +548,12 @@ closeBtn.addEventListener('click',closeModal);
   btn.textContent = 'En savoir plus';
 
   if (seen) {
-    // 재방문: 페이지 로드 즉시 데모를 열어 둬서 스크롤 가능하게
     demo.style.display = 'block';
     document.body.style.overflow = '';   // 혹시 잠겨있으면 해제
     btn.onclick = () => {
       window.scrollTo({ top: demo.offsetTop, behavior: 'smooth' });
     };
   } else {
-  // 첫 방문자: 스크롤 막기
   document.body.style.overflow = 'hidden';
   btn.onclick = openModal;
   }
@@ -513,8 +600,6 @@ closeBtn.addEventListener('click',closeModal);
     'd':'ḑ','D':'Ḑ',
     'h':'ḩ','H':'Ḩ'
   };
-  
-  // NEW: stroke(,,), caron(;;), dot-above(q)용 매핑
 const mapStroke = {
   'o':'ø','O':'Ø',
   'd':'đ','D':'Đ',
@@ -566,6 +651,19 @@ const mapTilde = {
   'n':'ñ','N':'Ñ'
 };
 
+const mapDev = {
+  'r': '\\',
+  't': '~',
+  'p': '|',
+  's': '[',
+  'd': ']',
+  'g': '`',
+  'h': '#',
+  'c': '^',
+  'b': '{',
+  'n': '}'
+};
+
 
   // ---- caret utils
   const sel = el => ({start: el.selectionStart, end: el.selectionEnd, val: el.value});
@@ -581,8 +679,6 @@ const mapTilde = {
     el.value = val.slice(0, from) + text + val.slice(to);
     setCaret(el, from + text.length);
   }
-
-  // ---- undo (Esc) : snapshot last transform only
   let lastUndo = null;
   function snapshot() {
     const {start, end, val} = sel(pad);
@@ -608,6 +704,161 @@ let lastTransform = null;   // { trigger: string, target: string, posAfterTrigge
 let bypassOnce    = null;   // { trigger: string, target: string, posAfterTrigger: number }
 
   pad.addEventListener('keydown', (ev) => {
+    // 타이핑 시작하면 이전 변환 복구 스냅샷 폐기
+  if (!ev.ctrlKey && !ev.metaKey && !ev.altKey && ev.key !== 'Backspace' && ev.key !== 'Escape') {
+    lastUndo = null;
+  }
+
+// === Emoji panel (demo only) ===
+const emojiPanel = document.getElementById('emojiPanel');
+const emojiGrid  = document.getElementById('emojiGrid');
+const EMOJIS = Array.from('😀😁😂🤣😃😄😅😉😊😍😘😜🤔🤗🤩🥳😎😭😡🧡💔💢💦👍🙏✨🔥💯✅❌🌟🎉🎁📌🍔☕🚗✈🏡🏬※©®™👈👉👆👇');
+
+function ensureEmojiGrid() {
+  if (!emojiGrid || emojiGrid.childElementCount) return;
+  EMOJIS.forEach(e => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    // 화살표류는 색 이모지 강제(Emoji Presentation)
+	const needsVS16 = /^(?:[←→↑↓↔↕⟵⟶⟷])$/u.test(e);
+	b.textContent = needsVS16 ? (e + '\uFE0F') : e;
+
+    b.style.cssText = 'border:0;background:none;width:38px;height:38px;font-size:28px;line-height:1;cursor:pointer;';
+
+    b.addEventListener('click', () => {
+      insertAtCaret(e);
+      closeEmojiPanel();
+      pad.focus();
+    });
+    emojiGrid.appendChild(b);
+  });
+}
+
+function insertAtCaret(text){
+  const s = pad.selectionStart ?? pad.value.length;
+  const e = pad.selectionEnd ?? pad.value.length;
+  const v = pad.value ?? '';
+  pad.value = v.slice(0, s) + text + v.slice(e);
+  pad.selectionStart = pad.selectionEnd = s + text.length;
+}
+
+function openEmojiPanel(){
+  ensureEmojiGrid();
+  // pad 커서 아래쪽에 띄우기
+  const rectPad = pad.getBoundingClientRect();
+  const sel = pad.selectionStart ?? 0;
+
+  // 대충 pad 왼쪽 하단 기준으로 고정 (정확 커서 추적은 복잡하니 간단히)
+	emojiPanel.style.display = 'block';
+	emojiPanel.style.left = '12px';                  // ← 중앙정렬용 '' 아니고 12px
+	emojiPanel.style.top  = (rectPad.height - 12) + 'px';
+
+  // 밖 클릭/ESC로 닫기
+  window.addEventListener('mousedown', onOutsideClose, { capture:true });
+  window.addEventListener('keydown', onEscClose);
+}
+
+function closeEmojiPanel(){
+  if (!emojiPanel) return;
+  emojiPanel.style.display = 'none';
+  window.removeEventListener('mousedown', onOutsideClose, { capture:true });
+  window.removeEventListener('keydown', onEscClose);
+}
+function onOutsideClose(e){
+  if (!emojiPanel.contains(e.target)) closeEmojiPanel();
+}
+function onEscClose(e){
+  if (e.key === 'Escape') { e.preventDefault(); closeEmojiPanel(); }
+}
+
+
+  // 콜론(:) → 점(.)으로 대체 처리 (트리거용), 중복 삽입 방지
+  if (ev.key === ':') {
+    ev.preventDefault();
+	lastUndo = null;
+    const s = pad.selectionStart ?? pad.value.length;
+    const e = pad.selectionEnd ?? pad.value.length;
+    const v = pad.value ?? '';
+    // 점 하나만 삽입
+    pad.value = v.slice(0, s) + '.' + v.slice(e);
+    pad.selectionStart = pad.selectionEnd = s + 1;
+    return;
+  }
+
+  // 점(.) → 콜론(:) 리맵 (사용자 표시용)
+  if (ev.key === '.') {
+    ev.preventDefault();
+	lastUndo = null;
+    const s = pad.selectionStart ?? pad.value.length;
+    const e = pad.selectionEnd ?? pad.value.length;
+    const v = pad.value ?? '';
+    pad.value = v.slice(0, s) + ':' + v.slice(e);
+    pad.selectionStart = pad.selectionEnd = s + 1;
+    return;
+  }
+ 
+ const remap = {
+  '.': ':',
+  'ù': '‘',
+  '&': '1',
+  'é': '2',
+  '"': '3',
+  "'": '4',
+  '(': '5',
+  '-': '6',
+  'è': '7',
+  '_': '8',
+  'ç': '9',
+  'à': '0',
+  '1': '&',
+  '2': '«',
+  '3': '"',
+  '4': '»',
+  '5': '(',
+  '6': '-',
+  '7': '–',
+  '8': '_',
+  '9': '—',
+  '0': '•',
+  ')': '°',
+  '°': ')',
+  '+': '=',
+  '=': '+',
+  'â': '@',
+  'ê': '€',
+  '^': '→',
+  '¨': '←'
+};
+  if (remap[ev.key]) {
+    ev.preventDefault();
+	lastUndo = null;
+    const s = pad.selectionStart ?? pad.value.length;
+    const e = pad.selectionEnd ?? pad.value.length;
+    const v = pad.value ?? '';
+    const out = remap[ev.key];
+    pad.value = v.slice(0, s) + out + v.slice(e);
+    pad.selectionStart = pad.selectionEnd = s + out.length;
+    return;
+  }
+  
+  // ² : 단일 → 이모지 패널, Shift+² → '²' 입력
+if (ev.key === '²') {
+  ev.preventDefault();
+  if (ev.shiftKey) {
+    // Shift+²는 실제 ² 입력
+    const s = pad.selectionStart ?? pad.value.length;
+    const e2 = pad.selectionEnd ?? pad.value.length;
+    const v = pad.value ?? '';
+    pad.value = v.slice(0, s) + '²' + v.slice(e2);
+    pad.selectionStart = pad.selectionEnd = s + 1;
+  } else {
+    // 단일 ² → 데모용 이모지 패널 열기/토글
+    openEmojiPanel();
+  }
+  return;
+}
+
+
 	if (ev.key === 'Enter') return; // 기본 엔터 입력 허용
     if (ev.key === 'Escape') { ev.preventDefault(); restore(); return; }
     if (ev.ctrlKey || ev.metaKey || ev.altKey) return;
@@ -624,8 +875,6 @@ let bypassOnce    = null;   // { trigger: string, target: string, posAfterTrigge
 	
     const k = ev.key;
     if (k.length !== 1) return;
-	
-// ---- one-shot bypass: restore 직후 동일 모음/타겟은 변환 무시 ----
 if (bypassOnce) {
   const k = ev.key;                 // 방금 누른 키(문자 1개)
   const { posAfterTrigger, target } = bypassOnce;
@@ -638,8 +887,6 @@ if (bypassOnce) {
   // 위치가 달라졌거나 다른 키면 바이패스 해제하고 평소 로직 진행
   bypassOnce = null;
 }
-
-// ------ STROKE: ',,' + letter → stroke (consume TWO commas; keep extras)
 if (countTrailing(pad, ',') >= 2 && mapStroke[k]) {
   ev.preventDefault(); snapshot();
   const cnt = countTrailing(pad, ',');       // 2,3,4...
@@ -654,8 +901,6 @@ if (countTrailing(pad, ',') >= 2 && mapStroke[k]) {
   setCaret(pad, left.length + out.length);
   return;
 }
-
-// ------ CARON: ';;' + letter → caron (consume TWO semicolons; keep extras)
 if (countTrailing(pad, ';') >= 2 && mapCaron[k]) {
   ev.preventDefault(); snapshot();
   const cnt = countTrailing(pad, ';');       // 2,3,4...
@@ -670,8 +915,6 @@ if (countTrailing(pad, ';') >= 2 && mapCaron[k]) {
   setCaret(pad, left.length + out.length);
   return;
 }
-
-// before: if (hasTrailingOne(pad, 'q') && (k==='a'||k==='A'||k==='o'||k==='O'))
 if (countTrailing(pad, 'q') === 1 && (k==='a'||k==='A'||k==='o'||k==='O'||k==='s'||k==='S')) {
   ev.preventDefault(); snapshot();
   const { start } = sel(pad);
@@ -687,8 +930,6 @@ if (countTrailing(pad, 'q') === 1 && (k==='a'||k==='A'||k==='o'||k==='O'||k==='s
   replaceRange(pad, start - 1, start, out);
   return;
 }
-
-// ------ DOT ABOVE: 'qq' + letter → dot-above (consume TWO q's)
 if (countTrailing(pad, 'q') >= 2 && mapDotAbove[k]) {
   ev.preventDefault(); snapshot();
   const cnt = countTrailing(pad, 'q');       // 2,3,...
@@ -703,11 +944,6 @@ if (countTrailing(pad, 'q') >= 2 && mapDotAbove[k]) {
   setCaret(pad, left.length + out.length);
   return;
 }
-
-
-
-
-// ------ GRAVE: '`' + (a e i o u / upper) → grave only
 if ((k==='a'||k==='e'||k==='i'||k==='o'||k==='u'||k==='A'||k==='E'||k==='I'||k==='O'||k==='U') && hasTrailingOne(pad,'`')) {
   ev.preventDefault(); snapshot();
   const {start} = sel(pad);
@@ -716,9 +952,7 @@ if ((k==='a'||k==='e'||k==='i'||k==='o'||k==='u'||k==='A'||k==='E'||k==='I'||k==
   replaceRange(pad, start-1, start, out);
   return;
 }
-
-// ------ GRAVE-on-? : '?' 트리거에서 그레이브 + ñ/Ñ --------
-if (hasTrailingOne(pad, '?')) {
+if (hasTrailingOne(pad, '!')) {
   const _k = ev.key; // (기존 k와 충돌 방지용)
   if (
     _k==='a'||_k==='e'||_k==='i'||_k==='o'||_k==='u'||_k==='n'||
@@ -734,15 +968,11 @@ if (hasTrailingOne(pad, '?')) {
       (mapGrave && mapGrave[_k]) ? mapGrave[_k] : _k;
 
     // '?' 바로 앞의 트리거 한 글자를 결과로 치환
-    lastTransform = { trigger: '?', target: _k, posAfterTrigger: (start - 1) + 1 };
+    lastTransform = { trigger: '!', target: _k, posAfterTrigger: (start - 1) + 1 };
     replaceRange(pad, start - 1, start, out);
     return;
   }
 }
-
-
-
-// ------ TILDE: '~' + letter → tilde accent
 if (hasTrailingOne(pad, '~') && mapTilde[k]) {
   ev.preventDefault(); snapshot();
   const { start } = sel(pad);
@@ -751,9 +981,6 @@ if (hasTrailingOne(pad, '~') && mapTilde[k]) {
   replaceRange(pad, start - 1, start, out);
   return;
 }
-
-
-    // ------ tréma: '..' + vowel → tréma; if '...'+vowel, keep 1 dot (..ë rule)
     if (vowels.includes(k) && countTrailing(pad, '.') >= 2) {
       ev.preventDefault(); snapshot();
       const cnt = countTrailing(pad, '.');           // 2,3,4...
@@ -767,8 +994,6 @@ if (hasTrailingOne(pad, '~') && mapTilde[k]) {
       setCaret(pad, left.length + out.length);
       return;
     }
-
-    // ------ ACUTE: ',' + letter in mapAcute → acute; if ',,' + letter, keep first comma
     if (countTrailing(pad, ',') >= 1 && mapAcute[k]) {
       ev.preventDefault(); snapshot();
       const cnt = countTrailing(pad, ',');           // 1 or more
@@ -786,8 +1011,25 @@ if (hasTrailingOne(pad, '~') && mapTilde[k]) {
       setCaret(pad, left.length + out.length);
       return;
     }
-
-    // ------ circonflexe: ';' + vowel → circ; if ';;'+vowel, keep first ';' → ';ô'
+	
+    if (countTrailing(pad, '^') >= 1 && mapDev[k]) {
+      ev.preventDefault(); snapshot();
+      const cnt = countTrailing(pad, '^');           // 1 or more
+      const keep = Math.max(0, cnt-1);               // keep (cnt-1) commas
+      const {start, val} = sel(pad);
+      const left = val.slice(0, start - cnt) + '^'.repeat(keep);
+      const right = val.slice(start);
+      const out = mapDev[k] || k;
+      lastTransform = {
+        trigger: '^',
+        target: k,
+        posAfterTrigger: (start - cnt) + keep + 1
+      };
+      pad.value = left + out + right;
+      setCaret(pad, left.length + out.length);
+      return;
+    }
+	
     if (vowels.includes(k) && countTrailing(pad, ';') >= 1) {
       ev.preventDefault(); snapshot();
       const cnt = countTrailing(pad, ';');
@@ -803,8 +1045,6 @@ if (hasTrailingOne(pad, '~') && mapTilde[k]) {
       setCaret(pad, left.length + out.length);
       return;
     }
-
-    // ------ cédille (extended): ';' + letter in mapcédille → cédille
     // Priority note: vowels keep circonflexe (handled above). cédille applies to non-vowel letters with mappings.
     if (countTrailing(pad, ';') >= 1 && !vowels.includes(k) && mapcédille[k]) {
       ev.preventDefault(); snapshot();
@@ -819,8 +1059,6 @@ if (hasTrailingOne(pad, '~') && mapTilde[k]) {
       setCaret(pad, left.length + out.length);
       return;
     }
-
-    // ------ GRAVE: '`' + (a e i o u / upper) → grave
     if ((k==='a'||k==='e'||k==='i'||k==='o'||k==='u'||k==='A'||k==='E'||k==='I'||k==='O'||k==='U') && hasTrailingOne(pad,'`')) {
       ev.preventDefault(); snapshot();
       const {start} = sel(pad);
@@ -829,9 +1067,33 @@ if (hasTrailingOne(pad, '~') && mapTilde[k]) {
       replaceRange(pad, start-1, start, out);
       return;
     }
-
-    // default: plain insert
   });
+  
+/* DEV: ^x → 기호 (가림 현상 강제 해제) */
+pad.addEventListener('input', () => {
+  const v = pad.value || '';
+  const s = pad.selectionStart ?? v.length;
+  if (s < 2) return;
+
+  const head = v[s - 2];
+  const tail = v[s - 1];
+
+  // ^ 다음 한 글자만 개발자 맵
+  const mapDev = { r:'\\', t:'~', p:'|', s:'[', d:']', g:'`', h:'#', c:'^', b:'{', n:'}' };
+  const out = (head === '^') ? mapDev[tail] : null;
+  if (!out) return;
+
+  // 1틱 늦춰서 IME/조합 표시가 확정된 뒤 가림 해제
+  requestAnimationFrame(() => {
+    const v2 = pad.value || '';
+    const s2 = pad.selectionStart ?? v2.length;
+    if (s2 >= 2 && v2[s2 - 2] === '^' && v2[s2 - 1] === tail) {
+      pad.setRangeText(out, s2 - 2, s2, 'end'); // '^x' → out
+      pad.blur(); pad.focus();                  // 조합 가림 강제 해제
+    }
+  });
+});
+
 })();
 
 </script>
@@ -847,7 +1109,7 @@ window.addEventListener('load', function(){
 <section id="reviews" style="background:#f3f1e7; padding:64px 0; font-family:var(--ui-font);">
   <h2 style="text-align:center; font-size:42px; margin:0 0 12px; color:#000;">Laissez un avis</h2>
   <p style="text-align:center; margin:0 0 28px; line-height:1.6; color:#333;">
-    SuperQwerty - Accents parallèles
+    SuperAzerty - L’accomplissement d’AZERTY
   </p>
 
   <!-- form -->
@@ -873,7 +1135,7 @@ window.addEventListener('load', function(){
 
 <script>
 (function(){
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxVpQzLFf1V9hKBtIpOBnlv5XDRiAzZVxE5ybaWWMWNmq9tkPSfFVIBDIAie2uoJ6Tf/exec';
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw1UKKakpiYdMfZlTz8gJv5r8euypyT0W-4-EdhMkEsAhMq3AEVhuQd2xTOn_ws6q_ptA/exec';
   const $reviewsSec = document.getElementById('reviews');
   const $form  = document.getElementById('reviewForm');
   const $name  = document.getElementById('rvName');
@@ -979,7 +1241,6 @@ window.addEventListener('load', function(){
   #reviewsCue .chev{font-size:14px; line-height:1;}
 </style>
 <script>
-// Dock injector adapted for SuperQwerty index: attach below .demoWrap
 (function(){
   const reviews = document.getElementById('reviews');
   const demoWrap = document.querySelector('.demoWrap');
@@ -1016,9 +1277,9 @@ window.addEventListener('load', function(){
   color:#555;
   border-top:1px solid #ddd;
 ">
-  <div>SuperQwerty © 2025</div>
+  <div>SuperAzerty © 2025</div>
   <div style="margin-top:6px;">
-    Contact : <a href="mailto:contact@SuperQwerty.com" style="color:#333;text-decoration:none;">contact@SuperQwerty.com</a>
+    Contact : <a href="mailto:contact@SuperAzerty.com" style="color:#333;text-decoration:none;">contact@SuperAzerty.com</a>
   </div>
 </footer>
 </body>
@@ -1096,7 +1357,6 @@ html, body { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 
 
 <script>
-// ===== Gentle Snap: DEMO <-> REVIEWS (revisit only) =====
 (function(){
   const SEEN = window.UQ_IS_SEEN === true || localStorage.getItem('uq_seen_tutorial') === '1';
   const demo = document.getElementById('demo');
@@ -1127,8 +1387,6 @@ html, body { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
       if (idleTO) clearTimeout(idleTO);
       idleTO = setTimeout(checkAndSnap, delay);
     }
-
-    // Heuristic: snap only if user is near an anchor (within 35% of viewport).
     function checkAndSnap(){
       const y  = window.scrollY || window.pageYOffset;
       const vh = window.innerHeight || 0;
@@ -1174,8 +1432,6 @@ html, body { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
     function markInteract(){
       lastInteractAt = Date.now();
     }
-
-    // Inputs we consider: wheel/touch/keys
     window.addEventListener('wheel',   () => { markInteract(); nudgeSnapSoon(160); }, { passive:true });
     window.addEventListener('touchmove', markInteract, { passive:true });
     window.addEventListener('touchend',  () => { markInteract(); nudgeSnapSoon(140); }, { passive:true });
@@ -1195,354 +1451,6 @@ html, body { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 })();
 </script>
 
-<!-- ==== Virtual QWERTY (demo only, Shift one-shot) ==== -->
-<style>
-  .vkbd{position:fixed;bottom:14px;left:0;
-    z-index:9999;background:rgba(18,22,30,.92);border:1px solid #20293a;border-radius:12px;
-    padding:8px 10px;font-family:ui-monospace,menlo,consolas,monospace}
-  .vkbd-row{display:flex;gap:6px;margin:4px 0;justify-content:center}
-  .vkbd-row.r2{margin-left:6px}.vkbd-row.r3{margin-left:12px}
-.vkbd-key{
-  min-width:32px;
-  padding:7px 9px;
-  border-radius:8px;
-  border:1px solid #2a354a;
-  background:#1f2634;
-  color:#e9eef7;
-  font-size:18px;        /* ↑ 더 크게 */
-  line-height:1;
-  cursor:pointer;
-
-  position:relative;     /* 배지 위치를 위해 */
-  display:flex;
-  align-items:center;
-  justify-content:flex-start; /* 좌정렬 */
-  font-weight:700;
-  padding-left:6px;      /* 좌측 여백 */
-}
-.vkbd-key .accent{
-  position:absolute;
-  top:2px;
-  right:4px;
-  font-size:12px;    /* ↑ 더 크게 */
-  font-weight:800;
-  color:#ff3b30;     /* 빨간색 */
-  pointer-events:none;
-}
-
-  .vkbd-key:active{background:#2a3347}
-  .vkbd-key.backspace{min-width:64px;font-weight:600}
-  .vkbd-key.space{min-width:220px}
-  .vkbd-key.shift{min-width:56px;font-weight:700}
-  .vkbd-key.shift.active{background:#2b3650;border-color:#3a4a6a}
-  @media(max-width:768px){
-    .vkbd{padding:6px 8px}
-    .vkbd-key{min-width:24px;padding:5px 6px;font-size:12px}
-    .vkbd-key.backspace{min-width:56px}
-    .vkbd-key.space{min-width:160px}
-    .vkbd-key.shift{min-width:50px}
-    .vkbd-row.r2{margin-left:4px}.vkbd-row.r3{margin-left:8px}
-  }
-  /* 악센트 배지 공통 + 위치 */
-.acc{
-  position:absolute;
-  color:#ff3b30;   /* 빨강 */
-  font-weight:800;
-  line-height:1;
-  pointer-events:none;
-}
-
-/* 위치별 (크게 보이도록 16px) */
-.acc.acc-tr{ top:3px;  right:2px;  font-size:16px; }
-.acc.acc-tl{ top:2px;  left:4px;   font-size:16px; }
-.acc.acc-br{
-  bottom:6px;        /* ← 원래 2px에서 올림 */
-  right:5px;
-  font-size:16px;
-  transform:translateY(-2px); /* 살짝 위로 띄우기 */
-}
-
-</style>
-
-<style>
-/* Tutorial(모달) 열리면 가상자판/안내문 숨김 */
-#modal.on ~ #vkbd-root, #modal.on ~ #azerty-hint { display:none !important; }
-</style>
-
-<p id="azerty-hint" hidden style="
-  text-align:center;color:#9aa3b8;font-family:ui-sans-serif,system-ui;
-  font-size:14px;margin:4px 0 2px;">
-  Utilisateurs d’AZERTY : essayez ici avec le clavier virtuel.
-</p>
-
-
-<div id="vkbd-root" hidden></div>
-<script>
-(function(){
-  const padHook = document.getElementById('pad');
-if (!padHook) return;
-  const root=document.getElementById('vkbd-root'); root.hidden=true; root.className='vkbd';
-  
-  // === AZERTY hint (follows virtual keyboard) ===
-const hint = document.createElement('div');
-hint.id = 'azerty-hint';
-hint.textContent = "Utilisateurs d’AZERTY : essayez ici avec le clavier virtuel.";
-Object.assign(hint.style, {
-  position:'fixed', zIndex:'10000', color:'#9aa3b8',
-  fontFamily:'ui-sans-serif,system-ui', fontSize:'14px',
-  pointerEvents:'none'
-});
-document.body.appendChild(hint);
-
-// === 키보드를 #pad 중앙에 정렬 ===
-function placeKbd(){
-  const pad = document.getElementById('pad');
-  if (!pad) return;
-  const r = pad.getBoundingClientRect();
-  const kbw = root.offsetWidth || 0;
-  // 패드 중앙 x 좌표에서 키보드 너비 절반을 빼서 left 계산
-  let x = r.left + r.width/2 - kbw/2;
-  // 좌우 살짝 여유(8px) 주고 화면 밖 방지
-  x = Math.max(8, Math.min((window.innerWidth - kbw - 8), x));
-  root.style.left = x + 'px';
-}
-
-placeKbd();
-addEventListener('resize', placeKbd);
-addEventListener('scroll', placeKbd, {passive:true});
-new ResizeObserver(() => placeKbd()).observe(document.getElementById('pad'));
-
-
-function placeHint(){
-  const r = root.getBoundingClientRect();
-  hint.style.left = (r.left + r.width/2) + 'px';
-  hint.style.transform = 'translateX(-50%)';
-  hint.style.bottom = (window.innerHeight - r.top - 4) + 'px'; // 자판 위 8px
-  hint.hidden = root.hidden; // 자판과 동시 표시/숨김
-}
-placeHint();
-addEventListener('resize', placeHint);
-addEventListener('scroll', placeHint, {passive:true});
-
-// === 데모 섹션 가시성으로 자판/힌트 토글 ===
-  const demo = document.getElementById('demo');
-  if (demo) {
-  function syncByDemoVisibility() {
-  const r = demo.getBoundingClientRect();
-  const vis = (r.top < window.innerHeight * 0.85) && (r.bottom > window.innerHeight * 0.15);
-  root.hidden = !vis;
-  placeKbd();
-  hint.hidden = !vis;
-  placeHint(); // 위치 재계산
-  }
-  // 스크롤/리사이즈/해시변경 시 재평가
-  window.addEventListener('scroll',  syncByDemoVisibility, {passive:true});
-  window.addEventListener('resize',  syncByDemoVisibility);
-  window.addEventListener('hashchange', syncByDemoVisibility);
-  // 최초 1회 평가
-  syncByDemoVisibility();
-  }
- 
-  // === 튜토리얼(모달) 열리면 강제 숨김 ===
-  const modal = document.getElementById('modal');
-  if (modal) {
-  const mo = new MutationObserver(() => {
-  if (modal.classList.contains('on')) {
-    root.hidden = true;
-    hint.hidden = true;
-   } else {
-  // 모달 닫히면 데모 가시성 기준으로 다시 평가
-     if (typeof syncByDemoVisibility === 'function') syncByDemoVisibility();
-      }
-    });
-   mo.observe(modal, { attributes:true, attributeFilter:['class'] });
-  }  
-  let shiftActive=false;
-
-const layout=[
-  [
-    { base:'q', accTR:'e' },   // 합자: e
-    { base:'w' },
-    { base:'e' },
-    { base:'r' },
-    { base:'t' },
-    { base:'y' },
-    { base:'u' },
-    { base:'i' },
-    { base:'o' },
-    { base:'p' },
-    '⌫'
-  ],
-  [
-    { base:'a' },
-    { base:'s' },
-    { base:'d' },
-    { base:'f' },
-    { base:'g' },
-    { base:'h' },
-    { base:'j' },
-    { base:'k' },
-    { base:'l' },
-    // 세미콜론: 위-오른쪽에 ˆ, 아래-오른쪽에 ¸(세디유)
-    { base:';', accTR:'ˆ', accBR:'¸' },
-    { base:'\'' }
-  ],
-  [
-    'Shift',
-    { base:'z' },
-    { base:'x' },
-    { base:'c' },
-    { base:'v' },
-    { base:'b' },
-    { base:'n' },
-    { base:'m' },
-    // 콤마: 애큐트
-    { base:',', accTR:'´' },
-    // 점: 트레마
-    { base:'.', accTR:'¨' },
-    // 물음표: 좌-위에 그레이브, 우-위에 틸드
-    { base:'?', accTL:'`', accTR:'~' }
-  ],
-  ['Space']
-];
-
-  function codeOf(ch){
-    if(ch===';')return'Semicolon';
-    if(ch===',')return'Comma';
-    if(ch=== '.')return'Period';
-    if(ch==='/'||ch==='?')return'Slash';
-    if(ch==='\'')return'Quote';
-    if(ch===' ')return'Space';
-    if(ch.length===1&&/[a-z]/.test(ch))return'Key'+ch.toUpperCase();
-    return'';
-  }
-
-  function emitKey(key, code, useShift){
-    const pad=document.getElementById('pad'); if(!pad)return;
-    pad.focus();
-
-    const cc=(key&&key.length===1)?key.charCodeAt(0):0;
-    const kd=new KeyboardEvent('keydown',{key,code,shiftKey:!!useShift,bubbles:true,cancelable:true,composed:true,keyCode:cc,which:cc,charCode:cc});
-    pad.dispatchEvent(kd);
-
-    if(!kd.defaultPrevented){
-      if(key==='Backspace'){
-        const s=pad.selectionStart??pad.value.length,e=pad.selectionEnd??pad.value.length,v=pad.value??'';
-        if(s===e&&s>0){pad.value=v.slice(0,s-1)+v.slice(e);pad.selectionStart=pad.selectionEnd=s-1;}
-        else{pad.value=v.slice(0,s)+v.slice(e);pad.selectionStart=pad.selectionEnd=s;}
-        pad.dispatchEvent(new Event('input',{bubbles:true}));
-      }else if(key===' '){
-        const s=pad.selectionStart??pad.value.length,e=pad.selectionEnd??pad.value.length,v=pad.value??'';
-        pad.value=v.slice(0,s)+' '+v.slice(e);
-        pad.selectionStart=pad.selectionEnd=s+1;
-        pad.dispatchEvent(new Event('input',{bubbles:true}));
-      }else if(key.length===1){
-        const s=pad.selectionStart??pad.value.length,e=pad.selectionEnd??pad.value.length,v=pad.value??'';
-        pad.value=v.slice(0,s)+key+v.slice(e);
-        pad.selectionStart=pad.selectionEnd=s+1;
-        pad.dispatchEvent(new Event('input',{bubbles:true}));
-      }
-    }
-
-    pad.dispatchEvent(new KeyboardEvent('keyup',{key,code,shiftKey:!!useShift,bubbles:true,cancelable:true,composed:true,keyCode:cc,which:cc}));
-  }
-
-function emitFromLabel(label){
-  if(label==='⌫'){emitKey('Backspace','Backspace',false);return;}
-  if(label==='Space'){emitKey(' ','Space',false);return;}
-  if(label==='Shift'){ // 한 번만 적용되는 시프트
-    shiftActive=true;
-    shiftBtn.classList.add('active');
-    setTimeout(()=>shiftBtn.classList.remove('active'),150);
-    return;
-  }
-
-  // 가상자판 ? 버튼 → 실제로는 슬래시 입력
-  let sendKey = label === '?' ? '/' : label;
-
-  let useShift = shiftActive || (label==='?');
-  let key = sendKey;
-  if(/^[a-z]$/.test(sendKey) && useShift) key = sendKey.toUpperCase();
-  const code = codeOf(sendKey);
-  emitKey(key, code, useShift);
-  shiftActive = false;
-  shiftBtn.classList.remove('active');
-}
-
-
-  let shiftBtn=null;
-layout.forEach((row,i)=>{
-  const r=document.createElement('div'); r.className='vkbd-row r'+(i+1);
-  row.forEach(ch=>{
-    const label = (typeof ch === 'object') ? ch.base : ch;
-
-    const b=document.createElement('button');
-    b.type='button';
-    let cls='vkbd-key';
-    if(label==='⌫')cls+=' backspace';
-    if(label==='Space')cls+=' space';
-    if(label==='Shift'){cls+=' shift'; shiftBtn=b;}
-    b.className=cls;
-
-    // 기본 글자
-    b.textContent = label;
-
-    // 악센트 배지(빨간 표시)
-
-if (typeof ch === 'object') {
-  const add = (cls, txt) => {
-    if (!txt) return;
-    const s = document.createElement('span');
-    s.className = 'acc ' + cls; // acc + 위치 클래스
-    s.textContent = txt;
-    b.appendChild(s);
-  };
-  add('acc-tr', ch.accTR ?? ch.accent); // 우상단
-  add('acc-tl', ch.accTL);              // 좌상단
-  add('acc-br', ch.accBR);              // 우하단
-}
-
-    b.addEventListener('mousedown',e=>e.preventDefault());
-    b.addEventListener('click',()=>emitFromLabel(label));
-    r.appendChild(b);
-  });
-  root.appendChild(r);
-});
-
-})();
-</script>
-<!-- ==== /Virtual QWERTY ==== -->
-<script>
-(function(){
-  const root = document.getElementById('vkbd-root');   // 가상자판 래퍼
-  const demo = document.getElementById('demo');        // 체험기 섹션
-  const pad  = document.getElementById('pad');         // 입력 패드
-  if (!root || !demo) return;
-
-  // 기본은 숨김
-  root.hidden = true;
-
-  // 데모 섹션이 화면에 들어왔을 때만 보이게
-  const io = new IntersectionObserver(([ent])=>{
-    if (!ent) return;
-    if (document.activeElement === pad) { root.hidden = false; return; } // pad 포커스면 항상 표시
-    root.hidden = !ent.isIntersecting;
-  },{
-    threshold: 0.25,
-    rootMargin: '-10% 0px -35% 0px' // 위·아래 여유
-  });
-  io.observe(demo);
-
-  // pad 포커스/블러 시 가시성 보정
-  pad?.addEventListener('focus', ()=>{ root.hidden = false; placeKbd(); });
-  pad?.addEventListener('blur',  ()=>{
-    const r = demo.getBoundingClientRect(), vh = innerHeight||0;
-    const on = (r.top < vh*0.75) && (r.bottom > vh*0.25);
-    root.hidden = !on;
-	placeKbd();
-  });
-})();
-</script>
 <script>
 // ? ↔ / 입력 스왑 (직접 주입 방식)
 (() => {
@@ -1564,7 +1472,52 @@ if (typeof ch === 'object') {
     pad.selectionStart = pad.selectionEnd = s + 1;
     pad.dispatchEvent(new Event('input', { bubbles: true }));
   });
-})();
+  pad.addEventListener('input', () => {
+    if (pad.selectionStart !== pad.selectionEnd) return;
+    const s = (pad.selectionStart ?? (pad.value ? pad.value.length : 0));
+    if (s < 2) return;
+    const v = pad.value || '';
+    const tail2 = v.slice(s - 2, s);
+    if (tail2 === '.:') {
+      replaceRange(pad, s - 2, s, ':');
+    }
+  });
+
+// === Dead-key 결과 감지 후 개발자 변환 (circumflex only) ===
+pad.addEventListener('input', () => {
+  const v = pad.value || '';
+  if (!v) return;
+  const s = pad.selectionStart ?? v.length;
+  const tail2 = s >= 2 ? v.slice(s - 2, s) : '';
+  const tail1 = v.slice(s - 1, s);
+
+  function replaceRange(el, from, to, text){
+    const vv = el.value || '';
+    el.value = vv.slice(0, from) + text + vv.slice(to);
+    el.selectionStart = el.selectionEnd = from + text.length;
+  }
+
+  const devMap = {
+    '^r': '\\',
+    '^t': '~',
+    '^p': '|',
+    '^s': '[',
+    '^d': ']',
+    '^g': '`',
+    '^h': '#',
+    '^c': '^',
+    '^b': '{',
+    '^n': '}'
+  };
+
+  if (devMap[tail2]) {
+  if (tail1 === 'â') replaceRange(pad, s - 1, s, '@');
+    replaceRange(pad, s - 2, s, devMap[tail2]);
+  } else if (devMap[tail1]) {
+    replaceRange(pad, s - 1, s, devMap[tail1]);
+  }
+});
+
 </script>
 
 
