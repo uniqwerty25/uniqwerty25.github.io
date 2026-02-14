@@ -1,0 +1,272 @@
+*{
+	font-family:'Noto Sans JP',sans-serif;
+}
+.wrap{
+	width: 100%;
+	max-width: 800px;
+	margin: auto;
+	padding-top: 0px;
+}
+
+.inner{
+	width: 90%;
+	margin: auto;
+}
+
+/* header */
+.head_top{
+	height: 75px;
+	display: flex;
+	flex-direction:row;
+	
+}
+.header{
+	width:80%;
+	background: #93CDDD;
+	text-align: center;
+}
+
+.header .inner{
+	height: 75px;
+	display: flex;
+	
+	align-items: center;
+	justify-content: center;
+}
+
+.header h1{
+	color: #fff;
+	font-size: 28px;
+	/*font-size: 34px;*/
+	letter-spacing: 3px;
+}
+
+/* conBox */
+.conBox .inner{
+	width: 100%;
+}
+
+.conBox .top{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 14px 0;
+	height: 60px;
+}
+
+.conBox .top .tit{
+	display: flex;
+	align-items: center;
+}
+
+.conBox .top .tit img{
+	width: 53px;
+}
+
+.conBox .top .tit {
+	margin-left: 10px;
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 1;
+}
+
+.conBox .top .btnUl{
+	display: flex;
+	align-items: center;
+}
+
+.conBox .top .btnUl li{
+	position: relative;
+	margin-left: 14px;
+}
+
+.conBox .top .btnUl li img{
+	transition: all 0.4s;
+	display: block;
+	width: 52px;
+}
+
+
+.conBox .top .btnUl li img.on{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 1;
+	opacity: 0;
+}
+.conBox .top .btnUl li:hover img.on{
+	opacity: 1;
+}
+ .con_menu{
+	  display: flex;
+	  flex-direction:row;
+	  height:70%;
+	  
+	  justify-content:center;
+	    text-align:center;
+      align-items: center;
+	  gap:10px;
+}
+
+.conBox .bottom .bottom_menu{
+	display: flex;
+	
+	align-items: center;
+}
+.conBox .bottom .bottom_menu li{
+	position: relative;
+	margin-left: 14px;
+}
+.conBox .bottom .bottom_menu li:hover img.on{
+	opacity: 1;
+}
+.conBox .top .bottom_menu li img{
+	transition: all 0.4s;
+	display: block;
+	width: 52px;
+}
+.conBox .bottom .bottom_menu li img.on{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 1;
+	opacity: 0;
+}
+
+
+.conBox .bottom h3{
+	background: url(../haikana_img/sub/background.png) no-repeat center / cover;
+	text-align: center;
+	line-height: 1.5;
+	font-size: 20px;
+	letter-spacing: 3px;
+	margin: 40px 0;
+	font-weight: 400;
+}
+.conBox .bottom h4{
+	background: url(../haikana_img/sub/background.png) no-repeat center / cover;
+	text-align: center;
+	line-height: 1.5;
+	font-size: 20px;
+	letter-spacing: 3px;
+	margin: 30px 0;
+	font-weight: 400;
+	
+}
+.sub03 .conBox .bottom h3{
+	margin: 30px 0;
+}
+
+.conBox .bottom h3 strong{
+	font-weight: 700;
+}
+
+.conBox .bottom .menu{
+	padding: 0 100px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.conBox .bottom .menu li{
+	font-size: 22px;
+	letter-spacing: 1px;
+	margin-bottom: 10px;
+}
+
+.conBox .bottom .menu li a{
+	transition: all 0.2s;
+}
+
+.conBox .bottom .menu li a:hover{
+	color: #93CDDD;
+}
+
+.conBox .bottom .menu img{
+	width: 200px;
+}
+
+.bottomTxt{
+	color: #93cdcd;
+	font-weight: 600;
+	font-size: 24px;
+	display: block;
+	width: 100%;
+	text-align: center;
+	margin-top: 10px;
+	animation-delay: 3s;
+	opacity: 0;
+}
+
+@keyframes txt{
+	0%{opacity: 0;}
+	0%{opacity: 0;}
+}
+
+.imgBox{
+	/* margin-bottom: 50px; */
+}
+.imgBox img{
+	max-width: 100%;
+	display: block;
+	margin: auto;
+}
+
+
+@media screen and (max-width: 800px){
+
+.header .inner{
+	height: auto;
+	padding: 10px 0;
+}
+
+.header h1{
+	font-size: 4.5vw;
+}
+
+.conBox .top{
+	height: auto;
+	padding: 2vw;
+}
+
+.conBox .top .tit img{
+	width: 6vw;
+}
+
+.conBox .top .tit strong{
+	font-size: 4vw;
+}
+
+.conBox .top .btnUl li{
+	margin-left: 2vw;
+}
+
+.conBox .top .btnUl li img{
+	width: 8vw;
+}
+
+.conBox .bottom h3{
+	margin: 5vw 0;
+	font-size: 3.5vw;
+}
+
+.conBox .bottom .menu{
+	padding: 0 10%;
+}
+
+.conBox .bottom .menu li{
+	font-size: 3.5vw;
+}
+
+.conBox .bottom .menu img{
+	width: 24vw;
+}
+
+.bottomTxt{
+	font-size: 3vw;
+}
+
+
+}

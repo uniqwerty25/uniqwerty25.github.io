@@ -1,0 +1,672 @@
+@charset "UTF-8";
+
+@import "font.css";
+@import "reset.css";
+
+/* common */
+h1 {
+    font-size: 6rem;
+}
+
+h2 {
+    font-size: 4rem;
+}
+
+h3 {
+    font-size: 3.6rem;
+}
+
+h4 {
+    font-size: 2rem;
+}
+
+img{
+	max-width: 100%;
+}
+
+.fs-32 {
+    font-size: 3.2rem;
+}
+
+.fc-green {
+    color: #e75707;
+}
+
+p.jp {
+    font-family: 'NanumSquare', sans-serif;
+    font-weight: 800;
+}
+
+input[type=text],
+input[type=password],
+input[type=date],
+input[type=email],
+input[type=number] {
+    padding: 0 2rem;
+    font-size: 2.4rem;
+    border: 1px solid #707070;
+    border-radius: 1rem;
+    height: 5rem;
+}
+
+textarea[type=text] {
+    padding: 0 2rem;
+    font-size: 2.4rem;
+    border: 1px solid #707070;
+    border-radius: 1rem;
+    height: 15rem;
+}
+
+body{
+	width: 100%;
+}
+
+/* layout */
+#wrap {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    height: 100%;
+}
+
+/* header */
+#header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 0px 0 0;
+    color: #000;
+    z-index: 9;
+}
+
+#header .inner {
+    width: 90%;
+    margin: 0 auto;
+    padding: 0 0.5rem 0 0rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+#header .logo{
+	width: 200px;
+}
+
+#header .logo img{
+	width: 100%;
+}
+
+#gnb ul {
+    display: flex;
+    font-weight: 500;
+    font-size: 26px;
+}
+
+#gnb ul li {
+    padding: 0 2.5rem;
+}
+
+#gnb ul li a {
+    border-bottom: 5px solid transparent;
+    line-height: 1.8;
+}
+
+#gnb ul li.active a {
+    color: #e75707;
+    border-bottom: 5px solid #e75707;
+    font-weight: 500;
+}
+
+/* container */
+#container{
+	width: 100%;
+}
+
+br{
+	width: 100%;
+}
+
+/* sec */
+
+.sec {
+    position: relative;
+    background: #fff;
+    /* min-height: 100rem; */
+    align-items: left;
+    justify-content: left;
+    text-align: center;
+	width: 100%;
+	display: block !important;
+}
+
+.sec img{
+	display: block;
+	margin: auto;
+	max-width: 100%;
+}
+
+.sec-01 {
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    padding: 150px 0 0px;
+    /* min-height: 140rem; */
+}
+
+.sec-01 .inner > img:last-child{
+	margin-top: 200px;
+}
+
+.sec-01 .inner a{
+	display: block;
+	max-width: 599px;
+	margin-left: 100px;
+	padding: 20px;
+	border-radius: 10px;
+	transition: all 0.4s;
+}
+
+.sec-01 .inner a:hover{
+	background: #f1f1f1;
+}
+
+.sec-02 {
+    background: #fff;
+    display: flex;
+    padding: 50px 0 50px;
+}
+
+.sec-03 {
+    background: #fff;
+    display: flex;
+    padding: 50px 0 50px;
+}
+
+.sec-04 {
+    background: #fff;
+    display: flex;
+    padding: 50px 0 50px;
+}
+
+.sec-05 {
+    background: #fff;
+    display: flex;
+    padding: 50px 0 50px;
+}
+
+.sec-06 {
+    background: #fff;
+    display: flex;
+    padding: 50px 0 50px;
+    min-height: 20rem;
+}
+
+.sec .inner {
+    width: 90%;
+	max-width: 1200px;
+	margin: auto;
+}
+
+.conTxt{
+	max-width: 1090px;
+	margin: auto;
+	text-align: left;
+	padding-left: 150px;
+	margin-top: 10px;
+	font-size: 32px;
+	font-weight: 600;
+	line-height: 1.7;
+}
+
+
+/* footer */
+#footer {
+    position: relative;
+    background: #fff;
+    min-height: 10rem;
+    display: flex;
+	flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 0 2rem;
+    text-align: center;
+}
+
+#footer .fTxt{
+	width: 100%;
+	margin-bottom: 30px;
+	font-size: 28px;
+}
+
+/* keyboard */
+.keyboard2 {
+    margin: 0 auto;
+}
+
+.keyboard-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.key2 {
+    width: 5.8rem;
+    height: 6rem;
+    background: #070202;
+    border-radius: 1rem;
+}
+
+.key2~.key {
+    margin: 0 0 0 2.9rem;
+}
+
+.row~.row {
+    margin: 2.9rem 0 0;
+}
+
+.key2:active {
+    transform: scale(1.1);
+    outline: 10px solid #e75707;
+}
+
+.key2.active {
+    transform: scale(1.1);
+    outline: 10px solid #e75707;
+}
+
+.text {
+    margin: 0 auto;
+    width: 500px;
+    display: block;
+    margin-bottom: 50px;
+    border: 2px solid #0f0;
+}
+
+.text:focus {
+    outline: 0;
+}
+
+
+/* sec-01 */
+.sec-01 .inner {
+
+}
+
+.sec-01 .top {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 0 50px;
+    text-align: center;
+}
+}
+
+.sec-01 h1 {
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+.sec-01 .fs-32 {
+    font-weight: 500;
+}
+
+/* sec-02 */
+.sec-02 h2 {
+    margin-bottom: 7rem;
+}
+
+.sec-02 .roman-desc {
+    font-size: 2.4rem;
+    padding-bottom: 6rem;
+}
+
+.sec-02 .roman-desc .fs-32 {
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.sec-02 .gana,
+.sec-02 .roman {
+    text-align: left;
+    width: 84rem;
+    margin: 0 auto;
+}
+
+.sec-02 .bullet-round {
+    display: flex;
+    align-items: center;
+    font-size: 2.6rem;
+    font-weight: 600;
+    margin-bottom: 3.4rem;
+}
+
+.sec-02 .bullet-round:before {
+    content: '';
+    margin-right: 1rem;
+    width: 2rem;
+    height: 2rem;
+    background: #e75707;
+    border-radius: 50%;
+}
+
+.sec-02 .gana {
+    margin-top: 2rem;
+    margin-bottom: 14rem;
+}
+
+.sec-02 .key2 {
+    width: 6.3rem;
+    height: 6rem;
+}
+
+.sec-02 .key2:active {
+    transform: none;
+    outline: none;
+}
+
+.sec-02 .key2~.key2 {
+    margin: 0 0 0 1rem;
+}
+
+.sec-02 .row~.row {
+    margin: 1rem 0 0;
+}
+
+.sec-02 .row:last-of-type {
+    margin-left: -6.3rem;
+}
+
+.sec-02 .roman .roman-keyboard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sec-02 .roman .roman-keyboard ul {
+    display: flex;
+}
+
+.sec-02 .roman .roman-keyboard ul li~li {
+    margin: 0 0 0 1.8rem;
+}
+
+.sec-02 .canvas-box {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin: 0 0 0;
+}
+
+/* sec-03 */
+.btn-clear {
+    width: 12.6rem;
+    height: 5.5rem;
+    border-radius: 0.5rem;
+    background: #ffa2a2;
+    color: #fff;
+    font-size: 2.4rem;
+    font-weight: 600;
+    margin-left: 2rem;
+}
+
+.btn-clear:active {
+    background: #e35656;
+}
+
+.sec-03 .inner .text-box {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin: 4rem 0 0;
+}
+
+.sec-03 .inner .text-box textarea {
+    width: 60.6rem;
+    height: 12.8rem;
+    border: 1px solid #fda2a2;
+    border-radius: 0.5rem;
+    font-size: 2.6rem;
+}
+
+/* sec-04 */
+.sec-04 .inner h3 {
+    margin-bottom: 3rem;
+}
+
+.sec-04 .inner p {
+    /* font-size: 2.4rem; */
+}
+
+.sec-04 .download {
+    margin: 7.8rem 0 6rem;
+}
+
+.sec-04 .download div {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-bottom: 6rem;
+}
+
+.sec-04 .download div dl {
+    text-align: left;
+    margin-left: 2rem;
+}
+
+.sec-04 .download div dl dd {
+    font-size: 2.4rem;
+    margin-top: 1rem;
+}
+
+.sec-04 .download .btn-download {
+    width: 23.6rem;
+    height: 4.7rem;
+    background-color: #272323;
+    background-image: url("../images/ico_window.svg");
+    background-repeat: no-repeat;
+    background-position: left 41px center;
+    border-radius: 1rem;
+    color: #fafafa;
+    font-size: 2.4rem;
+    padding: 0 0 0 4rem;
+}
+
+.sec-04 hr {
+    height: 1px;
+    display: block;
+    /* width: 120rem; */
+    margin: 0 auto;
+}
+
+.sec-04 .sticker-box {
+    padding: 11rem;
+}
+
+.sec-04 .sticker-box h3 {
+    margin-bottom: 6rem;
+}
+
+/* sec-05 */
+.sec-05 .inner h3 {
+    margin-bottom: 3rem;
+}
+
+.sec-05 .inner p {
+    /* font-weight: 500; */
+}
+
+.sec-05 .inner .line {
+    width: 2.8rem;
+    height: 0.1rem;
+    background: #707070;
+    display: block;
+    margin: 6rem auto;
+}
+
+.sec-05 .inner .input-box {
+    width: 65rem;
+    margin: 0 auto;
+    font-weight: 500;
+    padding: 0 0 7rem;
+    border-bottom: 1px solid #707070;
+}
+
+.sec-05 .inner .input-box .input-group {
+    padding: 0 0 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.sec-05 .inner .input-box .input-group label {
+    width: 0.5rem;
+    margin-right: 0rem;
+    text-align: center;
+}
+
+.sec-05 .inner .input-box .input-group input {
+    width: 100%;
+}
+
+.sec-05 .inner .input-box .input-group textarea {
+    width: 100%;
+}
+
+.sec-05 .inner .input-box .input-group.email span {
+    margin: 0 2rem;
+}
+
+.sec-05 .inner .input-box .input-group .input-s {
+    width: 13rem;
+    margin-right: 1.6rem;
+}
+
+.sec-05 .inner .btn-green {
+    width: 21.6rem;
+    height: 5rem;
+    color: #fff;
+    background: #e75707;
+    font-size: 2.6rem;
+    font-weight: 600;
+    border-radius: 1rem;
+    margin-top: 4rem;
+}
+
+/* sec-05 */
+.sec-05 .inner h3 {
+    margin-bottom: 3rem;
+}
+
+.sec-05 .inner p {
+    /* font-weight: 500; */
+}
+
+/* jp */
+#wrap.jp {
+    font-family: 'Boku2-Bold', Verdana, Roboto, "Droid Sans", "æ¸¸ã‚´?·ãƒƒ??, YuGothic, "?¡ã‚¤?ªã‚ª", Meiryo, "?’ãƒ©??ƒŽè§’ã‚´ ProN W3", "Hiragino Kaku Gothic ProN", "ï¼?¼³ ï¼°ã‚´?·ãƒƒ??, "MS PGothic", sans-serif;
+}
+
+#wrap.jp h1 {
+    font-size: 4rem;
+    font-weight: bold;
+}
+
+#wrap.jp .sec-05 .inner .input-box {
+    width: 75rem;
+}
+
+#wrap.jp .sec-05 .inner .input-box .input-group label {
+    width: 22rem;
+}
+
+#wrap.jp .btn-green {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    font-weight: 700;
+}
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 720px){
+
+#header .inner{
+	align-items: center;
+	height: 70px;
+}
+
+#header .logo{
+	width: 110px;
+	position: relative;
+	top: -5px;
+	font-size: 20px;
+}
+
+#gnb ul{
+	font-size: 14px;
+}
+
+#gnb ul li{
+	padding: 0 10px;
+}
+
+#gnb ul li img{
+	height: auto !important;
+	width: 25px;
+}
+
+.conTxt{
+	font-size: 4.5vw;
+	padding-left: 12vw;
+}
+
+.sec{
+	padding: 5vw 0 10vw !important;
+}
+
+.sec-01{
+	padding: 100px 0 0vw !important;
+}
+
+.sec-01 .inner > img:last-child{
+	margin-top: 20vw;
+	width: 50%;
+}
+
+.sec-01 .inner a{
+	width: 55%;
+	margin-left: 4vw;
+	padding: 3vw;
+}
+
+.sec-06 .inner img{
+	width: 80%;
+}
+
+#footer .fTxt{
+	font-size: 3.5vw;
+}
+
+p.jp{
+	font-size: 3.5vw;
+}
+
+
+
+
+}

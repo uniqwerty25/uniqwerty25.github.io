@@ -1,0 +1,226 @@
+/* Lee Chansu's RESET CSS */
+
+@charset 'UTF-8';
+
+/*----------fonts----------*/
+
+/*Noto Sans*/
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+body{font-family: 'Noto Sans KR', sans-serif;}
+
+/*Nanum Gothic*/
+/*@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap');*/
+/*body{font-family: 'Nanum Gothic', sans-serif;}*/
+
+
+
+/*----------reset----------*/
+
+*{margin: 0;padding: 0;word-break: keep-all}
+body{color: #333}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video, select, textarea {margin: 0;padding: 0;border: 0;vertical-align: baseline;}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, time, details {display: block;}
+body {line-height: 1;}
+ol, ul, li {list-style: none;}
+blockquote, q {quotes: none;}
+blockquote:before, blockquote:after,
+q:before, q:after {content: ”;content: none;}
+table {border-collapse: collapse;border-spacing: 0;}
+
+a{outline:none; text-decoration:none; border:none;color:#333}
+a:link, a:visited, a:hover, a:active, a:focus {text-decoration:none; color:#333;}
+input, select, textarea, form img, img{vertical-align:middle;}
+input, select, textarea{background: #fff;border: 1px solid #333;box-sizing: border-box}
+caption, legend{display: none}
+button{background: none;border: none;cursor: pointer;outline: none}
+address {font-style:normal;}
+del {text-decoration:line-through;}
+div {-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;} /* 필요에 따라 전체선택자(*)에 지정 */
+
+
+
+/*----------class list----------*/
+
+.wi1200{width: 1200px;margin: 0 auto}
+.wi_re{width: 90%;margin: 0 auto;min-width: 320px}
+@media screen and (min-width: 768){
+    .wi_re{min-width: 768px;}
+}
+@media screen and (min-width: 1200px){
+    .wi_re{width: 1200px;}
+}
+
+.ind{text-indent: -9999px;font-size: 0}/* 텍스트 숨기기 */
+.clearfix::after{content: '';display: block;clear: both;}/* 하위요소가 float된 경우 높이 측정 */
+.hd{display: none}
+
+.li-{position: relative;margin-left: 7px;}/* 텍스트 밑에 - 적용 (개별적용) */
+.li-::before{content: '-';margin-left: -7px}
+.li-8{position: relative;margin-left: 7px;}/* 텍스트 밑에 * 적용 (개별적용) */
+.li-8::before{content: '*';margin-left: -7px}
+.li-o{position: relative;margin-left: 7px;}/* 텍스트 밑에  · 적용 (개별적용) */
+.li-o::before{content: '· ';margin-left: -7px;font-weight: bold}
+
+.ul->*{position: relative;margin-left: 7px;}/* 텍스트 밑에 - 적용 (하위모두적용) */
+.ul->*::before{content: '-';margin-left: -7px}
+.ul-8>*{position: relative;margin-left: 7px;}/* 텍스트 밑에 * 적용 (하위모두적용) */
+.ul-8>*::before{content: '*';margin-left: -7px}
+.ul-o>*{position: relative;margin-left: 7px;}/* 텍스트 밑에 · 적용 (하위모두적용) */
+.ul-o>*::before{content: '· ';margin-left: -7px;font-weight: bold}
+
+
+
+/*----------Animation----------*/
+
+.twinkle{animation: twinkle infinite alternate 0.6s} /* 서서히 반짝거리는 애니메이션 */
+@keyframes twinkle {
+    form{
+        opacity: 1;
+    }
+    to{
+        opacity: 0;
+    }
+}
+
+.blinking{
+	-webkit-animation:blink 0.5s ease-in-out infinite alternate;
+    -moz-animation:blink 0.5s ease-in-out infinite alternate;
+    animation:blink 0.5s ease-in-out infinite alternate;
+}/* 깜빡거리는 애니메이션 */
+@-webkit-keyframes blink{
+    0% {opacity: 0;}
+    1% {opacity: 0;}
+    50%{opacity: 0;}
+    51%{opacity: 1;}
+    100% {opacity: 1;}
+}
+@-moz-keyframes blink{
+    0% {opacity: 0;}
+    1% {opacity: 0;}
+    49%{opacity: 0;}
+    50%{opacity: 1;}
+    100% {opacity: 1;}
+}
+@keyframes blink{
+    0% {opacity: 0;}
+    1% {opacity: 0;}
+    50%{opacity: 0;}
+    51%{opacity: 1;}
+    100% {opacity: 1;}
+}
+
+.blinking_h{
+	-webkit-animation:blink_h 0.5s ease-in-out infinite alternate;
+    -moz-animation:blink_h 0.5s ease-in-out infinite alternate;
+    animation:blink_h 0.5s ease-in-out infinite alternate;
+}/* 깜빡거리는 애니메이션 */
+@-webkit-keyframes blink_h{
+    0% {opacity: 0.5;}
+    1% {opacity: 0.5;}
+    50%{opacity: 0.5;}
+    51%{opacity: 1;}
+    100% {opacity: 1;}
+}
+@-moz-keyframes blink_h{
+    0% {opacity: 0.5;}
+    1% {opacity: 0.5;}
+    49%{opacity: 0.5;}
+    50%{opacity: 1;}
+    100% {opacity: 1;}
+}
+@keyframes blink_h{
+    0% {opacity: 0.5;}
+    1% {opacity: 0.5;}
+    50%{opacity: 0.5;}
+    51%{opacity: 1;}
+    100% {opacity: 1;}
+}
+
+
+.ud{animation: ud infinite alternate 0.5s;display: block} /* 위 아래로 흔들리는 애니메이션 */
+@keyframes ud{
+    from{
+        transform: translateY(2.5px)
+    }
+    to{
+        transform: translateY(-2.5px)
+    }
+}
+
+.lr{animation: lr infinite alternate 0.5s;display: block} /* 좌우로 흔들리는 애니메이션 */
+@keyframes lr{
+    from{
+        transform: translateX(2.5px)
+    }
+    to{
+        transform: translateX(-2.5px)
+    }
+}
+
+.bs{animation: bs infinite alternate 0.5s;display: block} /* 커졌다 작아졌다하는 애니메이션 */
+@keyframes bs{
+    from{
+        transform: scale(0.95)
+    }
+    to{
+        transform: scale(1)
+    }
+}
+
+
+
+/* Hover */
+
+.t_ho1{letter-spacing: 0px;transition: letter-spacing 0.6s} /* 마우스 호버 시 자간 넓어지는 효과 */
+.t_ho1:hover{letter-spacing: 1.4px}
+
+.total{width: 200px;height: 30px}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
